@@ -25,7 +25,7 @@
 
 - Cấu hình Router 1 :  
 ```
-#int f0/0
+  #int f0/0
   #ip add 172.168.0.1 255.255.255.0
   #int f0/1 
   #ip add 11.0.0.2 255.255.255.252 
@@ -42,10 +42,38 @@
 ```
 - Cấu hình Router 2 : 
 ```
+  #int f0/0
+  #ip add 172.16.0.1 255.255.255.0
+  #int f0/1 
+  #ip add 10.0.0.2 255.255.255.252 
+  #int f1/0
+  #ip add 12.0.0.2 255.255.255.252
+  #int eth0/3/0
+  #ip add 13.0.0.2  255.255.255.252 
+  #router rip
+  #ver 2
+  #network 172.16.0.0
+  #network 10.0.0.0
+  #network 12.0.0.0
+  #network 13.0.0.0
 ```
 
 - Cấu hình Router 3: 
 ```
+  #int f0/0
+  #ip add 14.0.0.2 255.255.255.252
+  #int f0/1 
+  #ip add 15.0.0.2 255.255.255.252 
+  #int f1/0
+  #ip add 13.0.0.2 255.255.255.252
+  #int eth0/3/0
+  #ip add 192.16.0.1  255.255.255.0 
+  #router rip
+  #ver 2
+  #network 192.16.0.0
+  #network 14.0.0.0
+  #network 15.0.0.0
+  #network 13.0.0.0
 ```
 
 - Kiểm tra :   

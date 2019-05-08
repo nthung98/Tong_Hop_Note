@@ -90,4 +90,5 @@ TCP/IP UPDATED model gồm 5 tầng : Application , Transport , Network , Data L
 |  | -Phân biệt rõ chức năng giữa các tầng|-Các chức năng của vài tầng ở osi được gộp chung lại |  
 |  |-Phát triển mô hình trước rồi mới đến dịch vụ |-Phát triển từ dịch vụ rồi mới đến mô hình |
 
-1.3 Phương phấp tiếp cận : Từ trên xuống , Học từ tầng Application xuống Physical
+1.3 Phương phấp tiếp cận :  
+ Từ trên xuống , Học từ tầng Application xuống Physical
