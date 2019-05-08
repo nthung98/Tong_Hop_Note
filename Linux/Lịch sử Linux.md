@@ -74,7 +74,7 @@ Nhắm vào thị trường doanh nghiệp , cơ quan , máy chủ .Ổn định
 Nhắm đến những người mới dùng Linux   
 
 **CẤU TRÚC THƯ MỤC CỦA LINUX** : 
-<img src= "">  
+<img src= "https://i.imgur.com/U29HOwB.jpg">  
 1. / – Root
 - Mở từng tập tin và thư mục từ thư mục Root.
 - Chỉ có Root user mới có quyền viết dưới thư mục này.

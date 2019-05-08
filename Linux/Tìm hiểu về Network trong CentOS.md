@@ -34,5 +34,39 @@
 
 # THAY ĐỔI IP TĨNH :
 
-* Vào thư mục có đường dẫn sau : /etc/sysconfig/network-scripts/
+* Vào thư mục có đường dẫn sau :  
+` /etc/sysconfig/network-scripts/`
+<img src="https://i.imgur.com/KrbrDEY.png">  
 
+Chỉnh sửa file cấu hình , ở đây là ifcfg-ens33:  
+<img src="https://i.imgur.com/SlRMcOa.png">  
+
+TYPE=Ethernet  
+BOOTPROTO=static  
+DEFROUTE=yes  
+IPV4_FAILURE_FATAL=no  
+IPV6INIT=yes  
+IPV6_AUTOCONF=yes  
+IPV6_DEFROUTE=yes  
+IPV6_PEERDNS=yes  
+IPV6_PEERROUTES=yes  
+IPV6_FAILURE_FATAL=no  
+NAME=ens33  
+UUID=73e1617d-a727-4c0b-80c5-a4b0fe99491  
+ONBOOT=yes  
+IPADDR=192.168.30.55 // Địa chỉ IP  
+PREFIX=24// Prefix  
+GATEWAY=192.168.30.2 // Địa chỉ Gateway  
+
+Lưu ý  : Thứ tự câu lệnh không quan trọng  
+DEVICE : Tên card mạng   
+NAME : Giống Device   
+ONBOOT : Để yes để khi reboot hệ thống network có thể bật lên với cấu hình card mạng tương ứng .  
+BOOTPROTO : Cấu hình IP tĩnh hay DHCP  
+
+	* Lưu file và restart lại network service : systemctl restart network
+	* Sau đó kiểm tra lại ip của máy :  
+
+<img src="https://i.imgur.com/U3i57Ec.png">  
+
+Ta thấy ip của ens33 đã thành 192.168.30.55 như đã đặt trong file cấu hình .
