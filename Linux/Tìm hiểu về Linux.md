@@ -1,4 +1,4 @@
-# Chương 1.BASIC COMMANDS :  
+# Chương 1:BASIC COMMANDS :  
 
 **Locating Applications**  
 Tùy vào từng bản phân phối , các phần mềm và chương trình có thể được cài đặt ở các directory khác nhau . Nhưng các lệnh, chương trình thực thì thường được lưu ở các directory sau : 
@@ -211,20 +211,24 @@ The /dev directory chứa các file cho  hardware và software devices, không c
 add user vào group :  
 #useradd –g groupname username  
 
-**File permissions**
-|Command||
-|-|-|
-|chown|Thay đổi quyền sở hữu của file hoặc directory|
-|chgrp|Thay đổi quyền sở hữu nhóm |
-|chmod|thay đổi quyền truy cập file |  
+**File permissions**  
 
-Files có 3 loại  permissions: read (r), write (w), execute (x).Viết tắt theo thứ tự rwx. Phân quyền tác động đến 3 đối tượng : user (u), group (g), và others (o).
+|Command||  
+|-|-|  
+|chown|Thay đổi quyền sở hữu của file hoặc directory|  
+|chgrp|Thay đổi quyền sở hữu nhóm |  
+|chmod|thay đổi quyền truy cập file |    
+
+Files có 3 loại  permissions: read (r), write (w), execute (x).Viết tắt theo thứ tự rwx. Phân quyền tác động đến 3 đối tượng : user (u), group (g), và others (o).  
+
 <img src="https://i.imgur.com/BAQPMeK.png">
 
 VD : 
-Phân lại quyền cho file :
+Phân lại quyền cho file :  
+
 <img src="https://i.imgur.com/yXnMP6Z.png">  
 
-phân quyền group cho file :
+phân quyền group cho file :  
+
 <img src="https://i.imgur.com/ijFTJQs.png">
  
