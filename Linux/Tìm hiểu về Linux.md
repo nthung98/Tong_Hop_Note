@@ -18,7 +18,7 @@ Ví dụ :
 `$ whereis diff`  
 diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz  
 
-**Accessing Directories**
+**Accessing Directories**  
   
 |Command|Kết quả|
 |---|---|
@@ -27,7 +27,8 @@ diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz
 |cd-|Chuyển về thư mục trước |
 |cd/|Chuyển về thư mục root|
 
-**Exploring the Filesystem**
+**Exploring the Filesystem**  
+
 |Command|Kết quả|
 |--|--|
 |ls|Liệt kê các file và thư mục trong directory|
@@ -94,6 +95,7 @@ Lệnh **find** :
 
 
 **Manage files**  
+
 |Command |Usage|
 |-|-|
 |cat|Dùng để xem file k quá dài |
@@ -114,14 +116,17 @@ truyền một đoạn vào file
 
 Lệnh `diff` dùng để so sánh files và directories .  
 
-VD : 
-diff file1.txt file2.txt
-
-**The file utility**  
-Dùng lệnh `file` để xem được định dạng của file .
 VD :
+```sh 
+diff file1.txt file2.txt
+```
+**The file utility**  
+Dùng lệnh `file` để xem được định dạng của file .  
+VD :
+```sh
 $ file /etc/resolv.conf
-/etc/resolv.conf: ASCII text  
+/etc/resolv.conf: ASCII text 
+``` 
 # Chương 3 :File System  
 Hệ thống file của Linux có dạng cây (tree). Bắt đầu bằng root directory, đánh dấu bằng /.
 
@@ -176,14 +181,14 @@ The /dev directory chứa các file cho  hardware và software devices, không c
 
 **The boot directory**
 
- /boot directorychứa các file dùng để boot system. 
+ /boot directory chứa các file dùng để boot system. 
 
 **The libraries directory**
 
  /lib chứa các thư viện phục vụ các phần mềm chạy trong folder /bin và /sbin . 
 
 **Additional directories**  
-
+  
 |Directory|Usage|
 |-|-|
 |/opt|Các packages sofware|
@@ -207,10 +212,13 @@ The /dev directory chứa các file cho  hardware và software devices, không c
    Group là tập hợp nhiều user lại. Mỗi user luôn là thành viên của một group.
 
   Lệnh Tạo group :   
+ ```sh
   #groupadd groupname  
+```
 add user vào group :  
+```sh
 #useradd –g groupname username  
-
+```
 **File permissions**  
 
 |Command||  
