@@ -27,7 +27,7 @@ diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz
 |cd-|Chuyển về thư mục trước |
 |cd/|Chuyển về thư mục root|
 
-**Exploring the Filesystem**  
+**Exploring the Filesystem**    
 
 |Command|Kết quả|
 |--|--|
@@ -36,9 +36,6 @@ diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz
 |ls -l | sẽ hiển thị tên file, directory cùng với size, ngày tháng chỉnh sửa gần nhất, user sở hữu và các permisson của user đó|  
 |ls - r|Đưa ra danh sách với thứ tự ngược lại |  
 |ls -R |Liệt kê thành các cây thư mục |  
-|||  
-|||  
-|||
 |tree| Hiển thị tree view |
 |tree -d | Danh sách directory và file|
 
@@ -231,7 +228,7 @@ Files có 3 loại  permissions: read (r), write (w), execute (x).Viết tắt t
 
 <img src="https://i.imgur.com/BAQPMeK.png">
 
-VD : 
+VD :   
 Phân lại quyền cho file :  
 
 <img src="https://i.imgur.com/yXnMP6Z.png">  
