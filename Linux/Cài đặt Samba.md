@@ -65,6 +65,7 @@ Trên Client, vào RUN gõ đường máy chủ chia sẽ dữ liệu điền đ
 
 Khi truy cập thành công ta có thể vào folder Share và chia sẻ file  
 <img src="https://i.imgur.com/FuP28jd.png">  
+
 **Lưu ý**  
 Nếu không thể truy cập từ window vào folder share của linux ta tắt firewalld và SElinux của CentOS đi  
 
