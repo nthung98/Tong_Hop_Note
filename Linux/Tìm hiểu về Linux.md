@@ -195,15 +195,26 @@ The /dev directory chứa các file cho  hardware và software devices, không c
 |/usr/lib|Thư viện phục vụ các chương trình |
 
 # Chương 4 : File permissions
+**Những file liên quan đến User và Group**
 
+#/etc/passwd
+
+Mỗi dòng trong tập tin gồm có 7 trường, được phân cách bởi dấu hai chấm.
+#/etc/group
+
+Mỗi dòng trong tập tin gồm có 4 trường, được phân cách bởi dấu hai chấm.
+#/etc/shadow
+
+Lưu mật khẩu đã được mã hóa và chỉ có user root mới được quyền đọc.  
   **USER**  
   Có 2 loại user cẳn bản là system users và regular users .  
   
   Đặc biệt có superuser , hay còn gọi là root user .Root user có khả năng tương tác với tất cả các file và mọi quyền trong hệ thống .Muốn truy cập là root user cần có lệnh sudo trước lệnh . 
   Các lệnh tạo : 
-  #useradd username
+  ```sh  
+  #useradd username  
   #passwd password  
-
+```
   **GROUP**  
 
    Group là tập hợp nhiều user lại. Mỗi user luôn là thành viên của một group.
@@ -235,5 +246,25 @@ Phân lại quyền cho file :
 
 phân quyền group cho file :  
 
-<img src="https://i.imgur.com/ijFTJQs.png">
+<img src="https://i.imgur.com/ijFTJQs.png">  
+
+**Quản lý quyền truy cập trong Centos7**  
+ Tạo 2 user và add vào 2 group khác nhau :  
+  useradd user1   
+  passwd user1  
+  useradd user2  
+  passwd user2  
+
+  groupadd dev  
+  groupadd dev1   
+
+  #useradd –g dev user1  
+  #useradd –g dev1 user2  
+
+  Từ user1 ta tạo 1 directory có quyền sở hữu bởi user1 và group dev . Phân quyền cho directory này chỉ cho group của uesr1 đọc , viết và thực thi , còn các group khác không được phép vào bằng lệnh `chmod 770 filename`  
+
+
+
+
+
  
