@@ -70,3 +70,8 @@ BOOTPROTO : Cấu hình IP tĩnh hay DHCP
 <img src="https://i.imgur.com/U3i57Ec.png">  
 
 Ta thấy ip của ens33 đã thành 192.168.30.55 như đã đặt trong file cấu hình .
+
+
+**Chú ý**  
+LINUX chỉ nhận 1 gateway , nên nếu máy ảo có 1 card NAT để kết nối internet và các card khác như host only để cấu hình nội bộ thì chỉ để hiển thị gatewat của interface nat ,các interface khác bỏ gatewat đi 
+ 

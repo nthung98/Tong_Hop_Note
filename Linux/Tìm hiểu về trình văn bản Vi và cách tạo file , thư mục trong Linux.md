@@ -24,14 +24,17 @@ mkdir tech hello world
 *Các tùy chọn* :  
 
 **-p** : tạo thư mục kèm thư mục cấp cha dù thư mục cha chưa tồn tại .  
-VD :mkdir -p <path_name>  
+VD :  
+`mkdir -p <path_name>`  
 mkdir -p thumuccha/thumuccon  
 
 **-v** : đưa ra thông báo mỗi directory được tạo ra  
-VD : mkdir -p -v <path_name>  
+VD :  
+` mkdir -p -v <path_name>`  
 
 **-m** : phân quyền truy cập cho thư mục mới tạo  
-VD : mkdir -p <permission_value> <path>  
+VD :  
+` mkdir -p <permission_value> <path>`  
 
 ## Vi:  
 
@@ -71,7 +74,7 @@ Ngoài ra, bạn có thể sử dụng các phím khác:
 |h|Đưa con trỏ sang trái |
 |l|Đưa con trỏ sang phải |  
 
-**Các lệnh thông thường trong Vi** 
+**Các lệnh thông thường trong Vi**   
 Lưu ý: Bạn phải ở chế độ Command.  
 |Lệnh|Mô tả|  
 |-|-|

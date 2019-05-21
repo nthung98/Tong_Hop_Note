@@ -261,7 +261,11 @@ phân quyền group cho file :
   #useradd –g dev user1  
   #useradd –g dev1 user2  
 
-  Từ user1 ta tạo 1 directory có quyền sở hữu bởi user1 và group dev . Phân quyền cho directory này chỉ cho group của uesr1 đọc , viết và thực thi , còn các group khác không được phép vào bằng lệnh `chmod 770 filename`  
+  Từ user1 ta tạo 1 directory có quyền sở hữu bởi user1 và group dev . Phân quyền cho directory này chỉ cho group của uesr1 đọc , viết và thực thi , còn các group khác không được phép vào bằng lệnh `chmod 770 filename`   
+  Sau đó đăng nhập vào user2 bằng lệnh `su user2`  
+  Ta thử truy cập vào directory của user1 thì thấy quyền truy cập bị từ chối .  
+  <img src="https://i.imgur.com/EqFqzsB.png">  
+   
 
 
 

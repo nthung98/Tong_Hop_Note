@@ -11,6 +11,12 @@ Samba là một ứng dụng chạy trên Unix cố gắng mô phỏng một h�
 
 yum install samba
 
+- Sau khi cài xong ta enable service samba để có thể chạy qua firewalld : 
+   ```sh
+   #firewall-cmd --permanent --zone=public --add-service=samba  
+
+   #firewall-cmd --reload
+```
 - Tạo một thư mục để thực hiện share dữ liệu. Ví dụ tạo thư mục có tên là “share”:  
 
 `mkdir home/username/Share`  
@@ -73,7 +79,7 @@ Nếu không thể truy cập từ window vào folder share của linux ta tắt
 #systemctl disable firewalld
 
 - Tắt SeLinux  
-Sửa file /etc/selinux/config , thay đổi giá trị SELINUX=disabled  
+Sửa file /etc/selinux/config , thay đổi giá trị SELINUX=disabled    
 
 `vi /etc/selinux/config`
 
