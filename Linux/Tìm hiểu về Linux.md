@@ -257,8 +257,8 @@ phân quyền group cho file :
 
   groupadd dev  
   groupadd dev1  
-       
-Thêm user vào các nhóm 
+
+Thêm user vào các nhóm   
   #useradd –g dev user1  
   #useradd –g dev1 user2  
 
