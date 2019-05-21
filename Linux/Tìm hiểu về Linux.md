@@ -256,8 +256,9 @@ phân quyền group cho file :
   passwd user2  
 
   groupadd dev  
-  groupadd dev1   
-
+  groupadd dev1  
+       
+Thêm user vào các nhóm 
   #useradd –g dev user1  
   #useradd –g dev1 user2  
 
