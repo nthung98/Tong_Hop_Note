@@ -1,3 +1,4 @@
+ <div id='id-section1'/>
  # Cấu hình RIP :  
  <img src="https://i.imgur.com/mhSrP79.png">  
  Các router chạy RIP version 2 , từ các PC và các Router có thể ping đến các mạng khác .
