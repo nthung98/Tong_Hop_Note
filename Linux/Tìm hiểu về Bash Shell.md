@@ -59,7 +59,7 @@ readonly NAME
 
 Khi đánh dấu biến là unset , không thể truy cập dữ liệu của biến .  
 - Variables Types:  
-Khi shell đang chạy , có 3 loại biến chính :
+Khi shell đang chạy , có 2 loại biến chính :
 
     - Local Variables (Shell Variables)− A local variable is a variable that is present within the current instance of the shell. It is not available to programs that are started by the shell. They are set at the command prompt.
 
