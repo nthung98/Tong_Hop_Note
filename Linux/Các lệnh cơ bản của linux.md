@@ -49,7 +49,26 @@ Hiển thị RAM :
  HOME là một biến môi trường đại diện cho thư mục home của người dùng. Lệnh cd không có đối số sẽ thay đổi thư mục làm việc hiện tại thành giá trị của HOME. Nghĩa là lệnh cd $HOME và cd ~ là tương đương nhau .  
  
  - Biến $PATH :  
-PATH là biến đưa ra danh sách các directory mà hệ thống tìm đến khi thực hiện các lệnh hoặc script để chạy . Mỗi directory path được ngăn cách bởi dấu ":" .
+PATH là biến đưa ra danh sách các directory mà hệ thống tìm đến khi thực hiện các lệnh hoặc script để chạy . Mỗi directory path được ngăn cách bởi dấu ":" .  
+
+**history**  
+Hiển thị các lệnh đã dùng trong Terminal  
+<img src="https://i.imgur.com/tZrfTam.png">  
+
+- Hiển thị thêm ngày giờ của lệnh :  
+Định nghĩa biến môi trường HISTTIMEFORMAT trong file .bash_profile như sau    
+`HISTTIMEFORMAT="%d/%m/%y %T " `  
+Trong đó  
+  - %d : Ngày  
+  - %m : Tháng  
+  - %y : Năm  
+  - %T : Thời gian  
+
+<img src="https://i.imgur.com/2dR3QEo.png">  
+
+Sau đó dùng lệnh source ~/.bash_profile để load các cấu hình của các biến môi trường .  Khi đó dùng history sẽ hiển thị thêm ngày giờ của lệnh đã được dùng  
+<img src="https://i.imgur.com/2kvTIFT.png">  
+
 
 
 
