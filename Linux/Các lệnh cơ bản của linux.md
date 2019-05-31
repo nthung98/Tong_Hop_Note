@@ -36,10 +36,18 @@ Trong đó
 Sau đó dùng lệnh source ~/.bash_profile để load các cấu hình của các biến môi trường .  Khi đó dùng history sẽ hiển thị thêm ngày giờ của lệnh đã được dùng  
 <img src="https://i.imgur.com/2kvTIFT.png">  
 
+- Đẩy lệnh history vào một file .log :   
+ Tạo một file .log và một file script , ta viết các lệnh sau trong script :  
+ ``` 
+$!/bin/bash  
+history -r  
+history > hist.log
+```  
+sau đó chạy file script và kiểm tra file log :  
+`source ./history.sh`  
 
-
-
-   
+<img src="https://i.imgur.com/Pby0Wox.png">
+     
 **Hiển thị RAM , CPU**  
 Hiển thị CPU :  
 `cat /proc/cpuinfo`    
@@ -72,3 +80,69 @@ Hiển thị RAM :
  
  - Biến $PATH :  
 PATH là biến đưa ra danh sách các directory mà hệ thống tìm đến khi thực hiện các lệnh hoặc script để chạy . Mỗi directory path được ngăn cách bởi dấu ":" .  
+
+**Process**  
+Lệnh `ps`:  
+<img src="https://i.imgur.com/lDqP4Ey.png">    
+Kill process theo tên :   
+`killall process-name`
+
+**netstat**  
+Netstat (network statistics) là một công cụ dòng lệnh để theo dõi các kết nối mạng vào và ra có sẵn trên tất cả các hệ điều hành dựa trên Unix và cũng có sẵn trên hệ điều hành Windows. Nó rất hữu ích trong việc khắc phục sự cố mạng và đo lường hiệu năng. Netstat là một trong những công cụ gỡ lỗi dịch vụ mạng cơ bản nhất, cho bạn biết cổng nào mở và bất kỳ chương trình nào đang lắng nghe trên các cổng.
+`netstat`  
+Các options :
+netstat -a  :hiển thị các cổng tcp và udp
+netstat -au
+netstat -at
+netstat -l : hiển thị các cổng tcp và udp trong trạng thái listening
+netstat -lu
+netstat -lt
+netstat -s : hiện các thông số của các protocol , bao gồm ip , icmp ,tcp ,udp
+
+**top**  
+The top command is another highly recommended method to see your Linux servers resource usage. One can see a list of top process that using the most memory or CPU or disk.
+
+**uname**  
+Hiển thị thông số của hệ thống :  
+`uname -s`: Kernal name    
+`uname -r`:Kernal release  
+`uname -v`:Kernal version  
+`uname -m`:Hardware name  
+
+**tail**  
+- in 10 dòng cuối .Có thể thay đổi số dòng bằng -n number
+- In ra những dòng của file trong khi vẫn đang bị viết bởi các chương trình khác  :  
+tail –follow test.txt  
+
+**file**  
+Đưa ra thuộc tính của file  
+`file <package_name>`  
+
+
+**find**  
+Tìm file :  
+``find``  
+Tìm theo tên :  
+`find -name abc.txt`
+  
+Tìm theo thể loại
+
+Bạn còn có thể tìm theo đúng loại file muốn tìm, bằng cách dùng -type. Một số option:
+
+    f: regular file
+    d: directory (thư mục)
+    l: symbolic link
+    c: character devices
+    b: block devices
+Tìm file theo dung lượng
+find / -size (+,-)50c
+    c: bytes
+    k: Kilobytes
+    M: Megabytes
+    G: Gigabytes
+    b: 512-byte blocks
+
+Tìm theo Owner và Permission
+
+Chúng ta có thể tìm theo user hay group owner bằng -user và -group.
+
