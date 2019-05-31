@@ -62,7 +62,7 @@ Hiển thị RAM :
  `yum list installed`  
 
  **Hiển thị các file nén trong hệ thống**  
- find . -iname \*.zip   
+` find . -iname \*.zip `  
 
  ### **Biến môi trường trong linux**  
 - Khi làm việc trên máy tính chúng ta cần những thông tin như tên phiên bản hệ điều hành (HĐH) đang chạy, tên thư mục home, thư mục chứa lệnh chương trình …
@@ -88,16 +88,16 @@ Kill process theo tên :
 `killall process-name`
 
 **netstat**  
-Netstat (network statistics) là một công cụ dòng lệnh để theo dõi các kết nối mạng vào và ra có sẵn trên tất cả các hệ điều hành dựa trên Unix và cũng có sẵn trên hệ điều hành Windows. Nó rất hữu ích trong việc khắc phục sự cố mạng và đo lường hiệu năng. Netstat là một trong những công cụ gỡ lỗi dịch vụ mạng cơ bản nhất, cho bạn biết cổng nào mở và bất kỳ chương trình nào đang lắng nghe trên các cổng.
-`netstat`  
-Các options :
-netstat -a  :hiển thị các cổng tcp và udp
-netstat -au
-netstat -at
-netstat -l : hiển thị các cổng tcp và udp trong trạng thái listening
-netstat -lu
-netstat -lt
-netstat -s : hiện các thông số của các protocol , bao gồm ip , icmp ,tcp ,udp
+Netstat (network statistics) là một công cụ dòng lệnh để theo dõi các kết nối mạng vào và ra có sẵn trên tất cả các hệ điều hành dựa trên Unix và cũng có sẵn trên hệ điều hành Windows. Nó rất hữu ích trong việc khắc phục sự cố mạng và đo lường hiệu năng. Netstat là một trong những công cụ gỡ lỗi dịch vụ mạng cơ bản nhất, cho bạn biết cổng nào mở và bất kỳ chương trình nào đang lắng nghe trên các cổng.  
+  
+Các options :  
+netstat -a  : hiển thị các cổng tcp và udp    
+netstat -au : hiển thị các cổng udp  
+netstat -at : hiển thị các cổng tcp
+netstat -l : hiển thị các cổng tcp v  à udp trong trạng thái listening  
+netstat -lu : hiển thị các cổng  udp trong trạng thái listening  
+netstat -lt : hiển thị các cổng tcp  trong trạng thái listening  
+netstat -s : hiện các thông số của các protocol , bao gồm ip , icmp ,tcp ,udp  
 
 **top**  
 The top command is another highly recommended method to see your Linux servers resource usage. One can see a list of top process that using the most memory or CPU or disk.
@@ -105,14 +105,14 @@ The top command is another highly recommended method to see your Linux servers r
 **uname**  
 Hiển thị thông số của hệ thống :  
 `uname -s`: Kernal name    
-`uname -r`:Kernal release  
-`uname -v`:Kernal version  
-`uname -m`:Hardware name  
+`uname -r`: Kernal release  
+`uname -v`: Kernal version  
+`uname -m`: Hardware name  
 
 **tail**  
 - in 10 dòng cuối .Có thể thay đổi số dòng bằng -n number
 - In ra những dòng của file trong khi vẫn đang bị viết bởi các chương trình khác  :  
-tail –follow test.txt  
+`tail –ftest.txt`  
 
 **file**  
 Đưa ra thuộc tính của file  
@@ -120,29 +120,27 @@ tail –follow test.txt
 
 
 **find**  
-Tìm file :  
-``find``  
-Tìm theo tên :  
+- Tìm file :   ``find``  
+- Tìm theo tên :  
 `find -name abc.txt`
   
-Tìm theo thể loại
+- Tìm theo thể loại:  
+    Bạn còn có thể tìm theo đúng loại file muốn tìm, bằng cách dùng -type. Một số option:  
+      
+      f: regular file  
+      d: directory (thư mục)  
+      l: symbolic link  
+      c: character devices  
+      b: block devices    
+- Tìm file theo dung lượng  
+`find / -size (+,-)50c`  
+    c: bytes  
+    k: Kilobytes  
+    M: Megabytes  
+    G: Gigabytes  
+    b: 512-byte blocks  
 
-Bạn còn có thể tìm theo đúng loại file muốn tìm, bằng cách dùng -type. Một số option:
-
-    f: regular file
-    d: directory (thư mục)
-    l: symbolic link
-    c: character devices
-    b: block devices
-Tìm file theo dung lượng
-find / -size (+,-)50c
-    c: bytes
-    k: Kilobytes
-    M: Megabytes
-    G: Gigabytes
-    b: 512-byte blocks
-
-Tìm theo Owner và Permission
+- Tìm theo Owner và Permission
 
 Chúng ta có thể tìm theo user hay group owner bằng -user và -group.
 

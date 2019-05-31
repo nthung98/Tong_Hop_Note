@@ -66,4 +66,3 @@ Khi shell đang chạy , có 2 loại biến chính :
     - Environment Variables − An environment variable is available to any child process of the shell. Some programs need environment variables in order to function correctly. Usually, a shell script defines only those environment variables that are needed by the programs that it runs.
 
 
-4. Biến đặc biệt :  
