@@ -1,0 +1,53 @@
+# WEB SERVER  
+1. Định nghĩa :  
+- Web server có thể là phần cứng hoặc phần mềm, hoặc cả hai.
+
+    - Ở khía cạnh phần cứng, một web server là một máy tính lưu trữ các file thành phần của một website (ví dụ: các tài liệu HTML, các file ảnh, CSS và các file JavaScript) và có thể phân phát chúng tới thiết bị của người dùng cuối (end-user). Nó kết nối tới mạng Internet và có thể truy cập tới thông qua một tên miền giống như mozilla.org.  
+    - Ở khía cạnh phần mềm, một web server bao gồm một số phần mềm điều khiển cách người sử dụng web truy cập tới các file được lưu trữ trên một HTTP server(máy chủ HTTP). Một HTTP server là một phần mềm hiểu được các URL (các địa chỉ web) và HTTP (giao thức trình duyệt của bạn sử dụng để xem các trang web).  
+    <img src="https://i.imgur.com/UmZz3sC.png">  
+
+Để xuất bản một website, bạn cần một static hoặc dynamic web server.
+
+Một static web server, hoặc stack, bao gồm một máy tính (hardware) với một HTTP server (phần mềm). Chúng ta gọi nó là "static" bởi vì server (máy chủ) gửi các file nó lưu trữ "nguyên vẹn" (as-is) tới trình duyệt của bạn.
+
+Một dynamic web server bao gồm một static web server cộng với các phần mềm mở rộng, phổ biến nhất là một application server (máy chủ ứng dụng) và một database. Chúng ta gọi nó là "dynamic" bởi vì application server cập nhật các file được lưu trữ trước khi gửi chúng tới tình duyệt của bạn thông qua HTTP server.  
+
+2. Nguyên tắc hoạt động của Web Server:  
+
+Các bước cơ bản trong tiến trình truyền tải trang web đến màn hình của bạn sau khi nhập http://maychuvietnam.com.vn được thể hiện như sau:
+
+Trình duyệt web tách địa chỉ website làm 3 phần:
+
+Tên giao thức: “http”
+
+Tên miền của máy chủ web: “http://maychuvietnam.com.vn”
+
+Tên tệp HTML: “web-server.htm”
+
+Trình duyệt liên hệ với máy chủ tên miền (DNS Server) để chuyển đổi tên miền “http://abcd.com.vn” ra địa chỉ IP tương ứng. Sau đó, trình duyệt sẽ gửi tiếp một kết nối tới máy chủ của website có địa chỉ IP này qua cổng 80. Dựa trên giao thức HTTP, trình duyệt gửi yêu cầu GET đến máy chủ, yêu cầu tệp HTML “web-server.htm”. (Chú ý: một cookies cũng sẽ được gửi kèm theo từ trình duyệt web đến máy chủ).
+
+Tiếp đến, máy chủ sẽ gửi một file văn bản có các thẻ HTML đến trình duyệt web của bạn (một cookies khác cũng được gửi kèm theo từ máy chủ tới trình duyệt web, cookies này được ghi trên đầu trang của mỗi trang web).
+
+Trình duyệt web đọc các thẻ HTML để xác lập định dạng (hình thức trình bày) trang web và kết xuất nội dung trang ra màn hình của bạn.
+
+Trong giao thức HTTP nguyên bản, bạn cần cung cấp đầy đủ đường dẫn của tên tệp, ví dụ như “/” hoặc “/tên tệp.htm”. Sau đó, giao thức sẽ tự điều chỉnh để có thể đưa ra một địa chỉ URL đầy đủ. Điều này cho phép các công ty kinh doanh dịch vụ lưu trữ có thể lưu trữ nhiều tên miền ảo (virtual domains), có nghĩa nhiều tên miền cùng tồn tại trên một máy chủ và sử dụng cùng một địa chỉ IP duy nhất. Ví dụ, trên máy chủ của Máy chủ Việt Nam, địa chỉ IP là 123.30.171.44, nhưng nó có hàng trăm tên miền khác nhau cùng tồn tại.
+
+Rất nhiều máy chủ web đưa thêm các chế độ bảo mật trong nhiều tiến trình xử lý. Ví dụ, khi bạn truy cập vào một trang web và trình duyệt đưa ra một hộp hội thoại yêu cầu bạn đưa vào tên truy cập và mật khẩu, lúc này trang web mà bạn truy cập đã được bảo vệ bằng mật khẩu. Máy chủ web hỗ trợ người quản lý trang web duy trì một danh sách tên và mật khẩu cho phép những người được phép truy cập vào trang web. Đối với những máy chủ chuyên nghiệp, yêu cầu mức độ bảo mật lớn hơn, chỉ cho phép những kết nối đã được mã hóa giữa máy chủ và trình duyệt, do đó những thông tin nhạy cảm như mã số thẻ tín dụng… có thể được truyền tải tên Internet.
+
+3. Cài httpd trên Centos:  
+  ### Định nghĩa :  
+- Apache hay là chương trình máy chủ HTTP là một chương trình dành cho máy chủ đối thoại qua giao thức HTTP. Apache chạy trên các hệ điều hành tương tự như Unix, Microsoft Windows, Novell Netware và các hệ điều hành khác. Apache đóng một vai trò quan trọng trong quá trình phát triển của mạng web thế giới (tiếng Anh: World Wide Web).   
+- Http (HyperText Transfer Protocol) là giao thức truyền tải siêu văn bản được sử dụng trong www dùng để truyền tải dữ liệu giữa Web server đến các trình duyệt Web và ngược lại. Giao thức này sử dụng cổng 80 (port 80) là chủ yếu.
+  ### Cài đặt :  
+
+- Cài đặt httpd :   
+ `yum install httpd`  
+- Kiểm tra , khởi động apache :  
+`systemctl start httpd`  
+`systemctl status httpd`  
+<img src="https://i.imgur.com/ii1zTLg.png">  
+- Để truy cập được web server ta cần cấu hình firewall allow web traffic :    
+`firewall-cmd --zone=public --add-port=80/tcp --permanent`  
+- Sau đó truy cập thử vào web server bằng IP của nó :  
+<img src="https://i.imgur.com/8eHoKWq.png">  
+
