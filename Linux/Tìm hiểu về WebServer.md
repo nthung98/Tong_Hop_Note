@@ -51,3 +51,10 @@ Rất nhiều máy chủ web đưa thêm các chế độ bảo mật trong nhi�
 - Sau đó truy cập thử vào web server bằng IP của nó :  
 <img src="https://i.imgur.com/8eHoKWq.png">  
 
+- Kiểm tra tại server thấy port 80 open để lắng nghe các request  bằng lệnh :  
+`netstat -pnltu`   
+<img src="https://i.imgur.com/GbDXYs5.png">  
+4. Virtual host : 
+ 
+
+
