@@ -73,6 +73,7 @@ vi /etc/httpd/sites-available/example.com.conf
    
 </VirtualHost>
 ```  
+ **Trong đó *:80 là cho phép truy cấp tất cả các interface bằng port 80**
 
 - Tương tự với file của website 2 :  
 ```
