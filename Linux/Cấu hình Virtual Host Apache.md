@@ -117,7 +117,8 @@ server_ip_address www.vidu2.com
 <img src="https://i.imgur.com/Icevcb6.png">  
 <img src="https://i.imgur.com/27mrmz7.png">  
 
-## 2. Cấu hình 2 website khác port :  
+## 2. Cấu hình 2 website khác port :
+(Đã có sẵn các cấu hình căn bản từ phần 1)  
  Cấu hình lại file httpd.conf để thêm port listening :  
  ```
  vi /etc/httpd/conf/httpd.conf  
@@ -132,6 +133,8 @@ vi /etc/httpd/sites-available/example.com.conf
 Sau đó ta thử truy cập từ client kiểm tra có truy cập vào web được không  .
 
 ## 3.Cấu hình website ở 2 dải IP khác nhau :  
+(Đã có sẵn các cấu hình căn bản từ phần 1)  
+
 - Cấu hình 2 file config của 2 website để đặt ở 2 dải IP khác nhau , ở ví dụ này sử dụng Web Server trên máy ảo , ta đặt 2 website này vào 2 dải IP của NAT và Host-only . 
 - Cấu hình website thứ nhất :  
 ```
@@ -140,7 +143,7 @@ vi /etc/httpd/sites-available/example.com.conf
 
   - File cấu hình :
 ```  
-<VirtualHost 193.168.30.55>
+<VirtualHost 192.168.30.55>
 
     ServerName www.vidu1.com
     ServerAlias vidu1.com
@@ -162,6 +165,10 @@ vi /etc/httpd/sites-available/example2.com.conf
 </VirtualHost>
 ~
 
-```
+```  
+Sau khi cấu hình xong dùng một máy client để ping và kiểm tra có truy cập được 2 trang web không :
+<img src="https://i.imgur.com/5Km8DCL.png">  
 
 
+
+4
