@@ -40,21 +40,142 @@ Rất nhiều máy chủ web đưa thêm các chế độ bảo mật trong nhi�
 - Http (HyperText Transfer Protocol) là giao thức truyền tải siêu văn bản được sử dụng trong www dùng để truyền tải dữ liệu giữa Web server đến các trình duyệt Web và ngược lại. Giao thức này sử dụng cổng 80 (port 80) là chủ yếu.
   ### Cài đặt :  
 
-- Cài đặt httpd :   
- `yum install httpd`  
-- Kiểm tra , khởi động apache :  
-`systemctl start httpd`  
-`systemctl status httpd`  
+- Cài đặt httpd :
+```   
+ yum install httpd 
+```
+- Kiểm tra , khởi động apache : 
+``` 
+systemctl start httpd  
+systemctl status httpd  
+```
 <img src="https://i.imgur.com/ii1zTLg.png">  
-- Để truy cập được web server ta cần cấu hình firewall allow web traffic :    
-`firewall-cmd --zone=public --add-port=80/tcp --permanent`  
+- Để truy cập được web server ta cần cấu hình firewall allow web traffic :  
+```    
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+```  
 - Sau đó truy cập thử vào web server bằng IP của nó :  
 <img src="https://i.imgur.com/8eHoKWq.png">  
 
 - Kiểm tra tại server thấy port 80 open để lắng nghe các request  bằng lệnh :  
-`netstat -pnltu`   
+```
+netstat -pnltu
+```   
 <img src="https://i.imgur.com/GbDXYs5.png">  
-4. Virtual host : 
- 
+
+4. Virtual host :   
+4.1 Tạo Directory cho website :  
+ - Tạo directory chứa các file cấu hình của website :  
+ ```
+ mkdir -p /var/www/example.com/public_html
+  mkdir -p /var/www/example2.com/public_html
+ ```  
+ - Cấp quyền truy cập cho các file trên :  
+ ```
+ chmod -R 755 /var/www  
+ ```  
+- Tạo và cấu hình các file index.html trong public_html :  
+```
+vi /var/www/example.com/public_html/index.html  
+```  
+
+```
+<html>
+  <head>
+    <title>Welcome to Example.com!</title>
+  </head>
+  <body>
+    <h1>Success! The example.com virtual host is working!</h1>
+  </body>
+</html>
+```  
+- Copy file vừa cấu hình sang directory của website thứ 2 và chỉnh sửa file index.html :  
+```
+cp /var/www/example.com/public_html/index.html /var/www/example2.com/public_html/index.html
+```  
+```
+<html>
+  <head>
+    <title>Welcome to Example2.com!</title>
+  </head>
+  <body>
+    <h1>Success! The example2.com virtual host is working!</h1>
+    <p>Vi du web thu 2 </p>  
+  </body>
+</html>
+
+```  
+4.2 Tạo Virtual Host Files :  
+Tạo directory sites-available để giữ các file cấu hình virtual host , còn directory sites-enabled sẽ giữ các symbolic links những website mình muốn hiển thị .  
+```
+sudo mkdir /etc/httpd/sites-available
+sudo mkdir /etc/httpd/sites-enabled
+```  
+Để apache server chạy các file từ directory sites-enabled , thêm lệnh sau vào cuối file httpd.conf :  
+```
+vi /etc/httpd/conf/httpd.conf
 
 
+IncludeOptional sites-enabled/*.conf
+
+```
+
+4.3 Cấu hình Virtual Host File  :  
+Tạo và cấu hình file example.com.conf như sau :  
+```
+vi /etc/httpd/sites-available/example.com.conf
+```  
+Chú ý : Các file virtual host cần có đuôi .conf    
+Cấu hình file :  
+```
+<VirtualHost *:80>
+
+    ServerName www.vidu1.com  
+    ServerAlias vidu1.com
+    DocumentRoot /var/www/example.com/public_html
+   
+</VirtualHost>
+```  
+
+Tương tự với file của website 2 :  
+```
+sudo cp /etc/httpd/sites-available/example.com.conf /etc/httpd/sites-available/example2.com.conf
+```  
+```
+sudo nano /etc/httpd/sites-available/example2.com.conf
+```  
+File cấu hình :  
+```
+<VirtualHost *:80>
+    ServerName www.vidu2.com
+    ServerAlias vidu2.com
+    DocumentRoot /var/www/example2.com/public_html
+
+</VirtualHost>
+```  
+
+4.4 Enable Virtual Host Files :  
+Ta tạo các symbolic link của các file cấu hình virtual host vào trong directory sites-enabled :  
+```
+sudo ln -s /etc/httpd/sites-available/example.com.conf /etc/httpd/sites-enabled/example.com.conf
+sudo ln -s /etc/httpd/sites-available/example2.com.conf /etc/httpd/sites-enabled/example2.com.conf
+```  
+Sau đó ta restart lại service để áp dụng các thay đổi :  
+```
+sudo apachectl restart  
+```
+4.5 Cấu hình bên client :  
+Do không có một domain thật , nên ta cần cấu hình file hosts ở một máy client để có thể truy cập vào web server (Ở ví dụ đây máy client chạy CentOS7):
+```
+vi /etc/hosts
+```
+File cấu hình :  
+```
+127.0.0.1   localhost
+127.0.1.1   guest-desktop
+server_ip_address www.vidu1.com
+server_ip_address www.vidu2.com
+```
+Sau đó ta có thể kiểm tra bằng cách nhập địa chỉ 2 website vào browser trong máy client :  
+<img src="https://i.imgur.com/Icevcb6.png">  
+<img src="https://i.imgur.com/27mrmz7.png">
