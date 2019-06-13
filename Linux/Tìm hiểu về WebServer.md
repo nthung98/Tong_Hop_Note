@@ -178,4 +178,31 @@ server_ip_address www.vidu2.com
 ```
 Sau đó ta có thể kiểm tra bằng cách nhập địa chỉ 2 website vào browser trong máy client :  
 <img src="https://i.imgur.com/Icevcb6.png">  
-<img src="https://i.imgur.com/27mrmz7.png">
+<img src="https://i.imgur.com/27mrmz7.png">  
+
+5. Đổi port apache web server :  
+ Trước tiên ta disable SElinux :  
+ ```
+ echo 0 > /selinux/enforce
+ ```  
+ Sau đó cấu hình lại file httpd.conf để đổi port  :  
+ ```
+ vi /etc/httpd/conf/httpd.conf  
+ ```
+ File cấu hình thêm dòng sau để web server lắng nghe từ cổng 1028:    
+<img src="https://i.imgur.com/lrHtpgE.png">  
+Kiểm tra port listening trên server bằng lệnh :  
+```
+netstat -pnltu
+```  
+<img src="https://i.imgur.com/86FxN4n.png">
+
+6. Multi-Processing Modules:  
+- MPM (Multi Processing Module) là một cơ chế hoạt động của Webserver Apache, cơ chế này quyết định cách thức tiếp nhận và xử lý các kết nối request từ client. Apache hỗ trợ 3 cơ chế MPM gồm: prefork, worker và event. Apache chỉ có thể chạy 1 MPM vào 1 thời điểm.  
+
+  -   Prefork: mỗi request gửi đến server sẽ được một process xử lý, điều này gây ra tốn nhiều RAM hơn nếu có nhiều request (do có nhiều process được tạo ra), nhưng ưu điểm là nếu 1 process gặp vấn đề thì không ảnh hưởng đến process khác. Số process được quy định trong file cấu hình apache.conf  
+
+  -  Worker: mỗi request gửi đến server sẽ được xử lý bởi một thread (các thread có thể chia sẻ memory với nhau), do đó tiết kiệm RAM hơn, nhược điểm là nếu có một thread gặp vấn đề sẽ ảnh hưởng các thread khác. Có thể quy định số thread trong file cấu hình Apache  
+
+  - Event: tương tự Worker, sử dụng thread để phục vụ các request thay vì dùng process, với MPM Event, thread riêng việt sẽ dùng để phục vụ request và giải phóng ngay sau khi xử lý xong, không phụ thuộc vào trạng thái kết nối http.
+
