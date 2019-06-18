@@ -91,8 +91,10 @@ systemctl enable mariadb
 mysql_secure_installation
 ```
 
-<img src="https://i.imgur.com/gCSGNaz.png">  
-- Ban đầu khi mới cài đặt ta chưa có password root của database nên ta nhấn enter .
+<img src="https://i.imgur.com/gCSGNaz.png">    
+
+- Ban đầu khi mới cài đặt ta chưa có password root của database nên ta nhấn enter .  
+
 <img src="https://i.imgur.com/qv6M3SR.png">  
 - Sau đó ta có thế set password cho database .Sau khi set password là một vài default setting cho bảo mật , sau khi thiết lập hết ta nhập y để xác nhận refresh quyền .  
 
@@ -104,7 +106,7 @@ Reload privilege tables now? [Y/n]
 ``` 
 
 
-### Cài đặt Remote access MariaDB:
+## Cài đặt Remote access MariaDB:
 - Tại sql server :
 ```
 firewall-cmd --permanent --add-service=mysql && firewall-cmd --reload
@@ -119,3 +121,62 @@ GRANT ALL PRIVILEGES ON *.* TO 'username'@'IP_Client' IDENTIFIED BY 'my-new-pass
   ```
   mysql -u user -h database_server_ip -p
   ```  
+
+  ## Quyền user trong MySQL :  
+  - Trước tiên ta tạo một user mới :
+```
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+```
+
+- Gán quyền cho user :
+```
+GRANT ALL PRIVILEGES ON database.table TO 'user'@'IP_Client';
+```
+
+
+Ta có thể gán kí tự (*)  nếu ta muốn user truy cập được tất cả databases/tables:  
+
+```	
+GRANT ALL PRIVILEGES ON database.* TO 'user'@'localhost';
+```
+hoặc   
+```
+	
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
+```  
+
+- Các quyền của MySQL : 
+
+  - ALL PRIVILEGES – grants all privileges to the MySQL user
+  -  CREATE – allows the user to create databases and tables
+  -  DROP - allows the user to drop databases and tables
+  - DELETE - allows the user to delete rows from specific MySQL table
+  - INSERT - allows the user to insert rows into specific MySQL table
+  - SELECT – allows the user to read the database
+  - UPDATE - allows the user to update table rows   
+
+
+ Để các thay đổi trong quyền được áp dụng ta phải dùng lệnh sau :
+
+```
+FLUSH PRIVILEGES;
+```
+
+Kiểm tra quyền đã được cấp chưa bằng lệnh : 
+``` 
+SHOW GRANTS FOR 'user'@'localhost'
+```  
+
+- Thu hồi quyền đã cấp cho user 
+```
+REVOKE [permission type] ON [database name].[table name] FROM ‘user’@‘localhost’;
+```
+Ví dụ, để thu hồi toàn bộ các quyền cho một user :
+```
+REVOKE ALL PRIVILEGES ON *.* FROM 'user'@'localhost';
+```
+
+- Xóa user:
+```
+DROP USER ‘non-root’@‘localhost’;
+```
