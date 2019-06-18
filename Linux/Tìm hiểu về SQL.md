@@ -106,7 +106,7 @@ Reload privilege tables now? [Y/n]
 ``` 
 
 
-## Cài đặt Remote access MariaDB:
+## 5.Cài đặt Remote access MariaDB:
 - Tại sql server :
 ```
 firewall-cmd --permanent --add-service=mysql && firewall-cmd --reload
@@ -122,7 +122,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'username'@'IP_Client' IDENTIFIED BY 'my-new-pass
   mysql -u user -h database_server_ip -p
   ```  
 
-  ## Quyền user trong MySQL :  
+  ## 6. Quyền user trong MySQL :  
   - Trước tiên ta tạo một user mới :
 ```
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
