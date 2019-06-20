@@ -170,6 +170,3 @@ vi /etc/httpd/sites-available/example2.com.conf
 Sau khi cấu hình xong dùng một máy client để ping và kiểm tra có truy cập được 2 trang web không :
 <img src="https://i.imgur.com/5Km8DCL.png">  
 
-
-
-4
