@@ -100,7 +100,7 @@ define('DB_USER', 'wordpressuser');
 /** MySQL database password */
 define('DB_PASSWORD', 'password');
 ```
-Cấu hình apache để server nhận web :  Cấu hình file config ở /etc/httpd/conf.d/  
+Cấu hình apache để server nhận web ,  Cấu hình file config ở /etc/httpd/conf.d/  
 ```
 vi /etc/httpd/conf.d/thanhhung.com.conf  
 ```
