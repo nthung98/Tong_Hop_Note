@@ -100,11 +100,6 @@ define('DB_USER', 'wordpressuser');
 /** MySQL database password */
 define('DB_PASSWORD', 'password');
 ```
-Cấu hình apache để server nhận web ,  Cấu hình file config ở /etc/httpd/conf.d/  
-```
-vi /etc/httpd/conf.d/thanhhung.com.conf  
-```
-
 
 
 Sau khi hoàn thành các bước trên cài đặt wordpress trên giao diện web,tại máy client truy cập vào domain name của server để cấu hình wordpress : 
