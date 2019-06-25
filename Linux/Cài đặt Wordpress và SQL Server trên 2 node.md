@@ -27,10 +27,13 @@ mysql_secure_installation
 ```
 
 - Cấu hình Mariadb cho phép web server truy cập :  
-sửa file /etc/my.conf  
+sửa file /etc/my.conf   
+```
+bind-address = IP_SQL_Server
+``` 
 
 
--Tạo user và database cho webserver :
+-Tạo user và database cho webserver :  
 Tạo database :  
 ```
 CREATE DATABASE wordpress;
