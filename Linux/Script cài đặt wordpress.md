@@ -1,39 +1,47 @@
+# Script cài đặt wordpress   
+1.Các mục cần cài đặt :  
+ - Cài đặt lamp (Linux,Apache,Mysql,Php)  
+     - Linux : Dùng CentOS 7  
+     - Apache : httpd  
+     - Mysql : Mariadb  
+     - PHP  
+- Cài đặt wordpress và tạo các user từ mysql để phục vụ wordpress  
+
+2.Script tham khảo :     
 #!/bin/bash -e  
 # Script cai lamb và wordpress  
-echo -n "Dat ten MySQL DB : "
-read mysqldb
-
-echo -n "Dat MySQL DB User: "
-read mysqluser
-
-echo -n "Dat mat khau MySQL Password: "
-read mysqlpass  
 # Cai dat httpd
 echo -n "Cai dat httpd"
- yum install -y httpd  
- systemctl start httpd.service  
+yum install httpd  
+systemctl start httpd.service  
 systemctl enable httpd.service  
- mkdir /etc/httpd/sites-available  
- mkdir /etc/httpd/sites-enabled  
+sudo mkdir /etc/httpd/sites-available  
+sudo mkdir /etc/httpd/sites-enabled  
 echo "
 IncludeOptional sites-enabled/*.conf ">>/etc/httpd/conf/httpd.conf 
 #Cai dat mysql  
 echo -n "Cai dat mariadb"
- yum install  -y mariadb-server mariadb  
- systemctl start mariadb  
+yum install mariadb-server mariadb  
+systemctl start mariadb  
 #mysql_secure_installation
 
 #Cai dat php 
- yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
- yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
- yum install -y yum-utils
-yum-config-manager --enable remi-php56
+sudo yum install php php-mysql
 
-yum install -y  php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfoce
-systemctl restart httpd.service
+sudo systemctl restart httpd.service
+yum install php-fpm
+yum install php-gd
+php5.6
 #Cau hinh wordpress
 
+echo -n "MySQL DB Name: "
+read mysqldb
 
+echo -n "MySQL DB User: "
+read mysqluser
+
+echo -n "MySQL Password: "
+read mysqlpass
 #echo -n "Enter your MySQL root password: "
 #read -s rootpass
 mysql -u root -p <<ten_script
@@ -46,17 +54,18 @@ ten_script
 #Cai dat wordpress  
 service httpd restart  
 cd ~
-sudo wget http://wordpress.org/latest.tar.gz  
+wget http://wordpress.org/latest.tar.gz  
 tar xzvf latest.tar.gz  
 cd wordpress/
 cp wp-config-sample.php wp-config.php  
 
  
-sed -e "s/database_name_here/"$mysqldb"/" -e "s/username_here/"$mysqluser"/" -e "s/password_here/"$mysqlpass"/" wp-config-sample.php > wp-config.php 
-sudo mkdir -p /var/www/relayserver.com/public_html    
-sudo mv ~/wordpress/* /var/www/relayserver.com/public_html/  
+sed -e "s/database_name_here/"$mysqldb"/" -e "s/username_here/"$mysqluser"/" -e "s/password_here/"$mysqlpass"/"  wp-config.php  
+
+mkdir -p /var/www/relayserver.com/public_html    
+mv ~/wordpress/* /var/www/relayserver.com/public_html/  
   
-sudo chown -R apache:apache /var/www/relayserver.com/public_html/      
+chown -R apache:apache /var/www/relayserver.com/public_html/      
 touch /etc/httpd/conf.d/relayserver.com.conf   
 
 echo "
