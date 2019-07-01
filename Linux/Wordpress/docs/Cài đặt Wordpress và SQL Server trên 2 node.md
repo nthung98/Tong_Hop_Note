@@ -27,7 +27,7 @@ mysql_secure_installation
 ```
 
 - Cấu hình Mariadb cho phép web server truy cập :  
-sửa file /etc/my.conf   
+sửa file /etc/my.cnf   
 ```
 bind-address = IP_SQL_Server
 ``` 
@@ -41,7 +41,7 @@ CREATE DATABASE wordpress;
 
 Ta tạo một mysql user mới chỉ được quyền truy cập vào wordpress database .   
 ```
-CREATE USER user@Ip_WebServer IDENTIFIED BY 'password';
+CREATE USER user@Web_Server_IP IDENTIFIED BY 'password';
 ```
 Phân quyền cho user đó :  
 ```
@@ -49,7 +49,7 @@ Phân quyền cho user đó :
 GRANT ALL PRIVILEGES ON wordpress.* TO user@Ip_WebServer IDENTIFIED BY 'password';
 ```
 ```
-Lưu ý : Ip_WebServer ở đây là ip của webserver , trong trường hợp này là 4.4.4.4
+Lưu ý : Ip_WebServer ở đây là ip của webserver , trong trường hợp này là 4.4.4.5
 ```
 
 ### Tại Web Server   

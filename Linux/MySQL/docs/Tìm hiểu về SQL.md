@@ -165,8 +165,13 @@ FLUSH PRIVILEGES;
 Kiểm tra quyền đã được cấp chưa bằng lệnh : 
 ``` 
 SHOW GRANTS FOR 'user'@'localhost'
-```  
+ ```  
 
+
+Thay đổi tên và ip gắn với user
+ ```  
+RENAME USER u1@localhost TO u1@4.4.4.5;
+```
 - Thu hồi quyền đã cấp cho user 
 ```
 REVOKE [permission type] ON [database name].[table name] FROM ‘user’@‘localhost’;
@@ -180,3 +185,4 @@ REVOKE ALL PRIVILEGES ON *.* FROM 'user'@'localhost';
 ```
 DROP USER ‘non-root’@‘localhost’;
 ```
+
