@@ -9,20 +9,21 @@ read mysqluser
 echo -n "Dat mat khau MySQL Password: "
 read mysqlpass 
 
-if [ "${mysqlpass}" == "" ]
-then
-    mysqlpass=""
-else
-    mysqlpass="-p${mysqlpass}"
-fi
-#Cau hinh khi cai mysql va wordpress tren cung 1 node
-#echo -n "Nhap mat khau mysql "
-#if [ "${rootpass}" == "" ]
+#if [ "${mysqlpass}" == "" ]
 #then
- #   rootpass=""
+  #  mysqlpass=""
 #else
-   # rootpass="-p${rootpass}"
+ #   mysqlpass="-p${mysqlpass}"
 #fi
+
+echo -n "Nhap mat khau mysql "
+read rootpass
+if [ "${rootpass}" == "" ]
+then
+    rootpass=""
+else
+    rootpass="-p${rootpass}"
+fi
 
 
 # Cai dat httpd
@@ -30,8 +31,8 @@ echo -n "Cai dat httpd"
  yum install -y httpd  
  systemctl start httpd.service  
 systemctl enable httpd.service  
- mkdir /etc/httpd/sites-available  
- mkdir /etc/httpd/sites-enabled  
+ mkdir -p /etc/httpd/sites-available  
+ mkdir -p /etc/httpd/sites-enabled  
 echo "
 IncludeOptional sites-enabled/*.conf ">>/etc/httpd/conf/httpd.conf 
 #Cai dat mysql  
@@ -56,12 +57,7 @@ systemctl restart httpd.service
 #Cau hinh wordpress
 
 
-mysql -u root --password=$mysqlpass<<sql.sh
-
-
-#echo -n "Enter your MySQL root password: "
-#read -s rootpass
-mysql -u root -p$mysqlpass <<ten_script
+mysql -u root --password=$rootpass<<ten_script
 CREATE DATABASE $mysqldb ;
 CREATE USER $mysqluser@localhost IDENTIFIED BY '$mysqlpass';
 GRANT ALL PRIVILEGES ON $mysqldb.* TO $mysqluser@localhost   IDENTIFIED BY '$mysqlpass';
