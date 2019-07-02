@@ -1,10 +1,10 @@
 # **Tìm hiểu về Linux**
 **1.Tìm hiểu về Linux :**      
- [2.1.Tìm hiểu DHCP và DHCP Server](./DHCP/docs/1.DHCP_va_DHCP_Server.md) 
-[1.2.Tìm hiểu về Linux](./docs/1.2.Tim_hieu_ve_Linux.md)        
-[1.3.Các lệnh cơ bản ](./docs/2.Cac_lenh_co_ban.md)   
-[1.4.Tìm hiểu về vi , vim và cách tạo file , thư mục](./docs/3.Vi_Vim_Cach_tao_file_thu_muc.md)    
-[1.5.Các gói cài đặt trong CentOS](./docs/4.Goi_cai_dat_trong_CentOS.md)    
+ [1.1..Tìm hiểu về lịch sử LInux](./Tìm hiểu Linux/docs/1.1.Lich_su_Linux.md) 
+[1.2.Tìm hiểu về Linux](./Tìm hiểu Linux/docs/1.2.Tim_hieu_ve_Linux.md)          
+[1.3.Các lệnh cơ bản ](./Tìm hiểu Linux/docs/2.Cac_lenh_co_ban.md)     
+[1.4.Tìm hiểu về vi , vim và cách tạo file , thư mục](./Tìm hiểu Linux/docs/3.Vi_Vim_Cach_tao_file_thu_muc.md)      
+[1.5.Các gói cài đặt trong CentOS](./Tìm hiểu Linux/docs/4.Goi_cai_dat_trong_CentOS.md)      
 
 **2.DHCP :**   
  [2.1.Tìm hiểu DHCP và DHCP Server](./DHCP/docs/1.DHCP_va_DHCP_Server.md)    
