@@ -7,12 +7,12 @@
 [1.5.Các gói cài đặt trong CentOS](./Tìm hiểu Linux/docs/4.Goi_cai_dat_trong_CentOS.md)    
 
 **2.DHCP :**   
-  [2.1.Tìm hiểu DHCP và DHCP Server](./DHCP/docs/1.DHCP_va_DHCP_Server.md)  
+ [2.1.Tìm hiểu DHCP và DHCP Server](./DHCP/docs/1.DHCP_va_DHCP_Server.md)  
 [2.2.DHCP RELAY](./DHCP/docs/2.DHCP RELAY.md)   
 
-**3.NFS, Samba**
-[-Samba](./NFS_Samba/docs/1.Samba.md)
- [-NFS](./NFS_Samba/docs/2.NFS.md)  
+**3.NFS, Samba**  
+[-Samba](./NFS_Samba/docs/1.Samba.md)  
+ [-NFS](./NFS_Samba/docs/2.NFS.md)    
  
  [**4.SSH**](./SSH/1.Tìm hiểu SSH.md)  
  
