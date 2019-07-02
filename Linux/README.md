@@ -6,7 +6,7 @@
 [1.4.Tìm hiểu về vi , vim và cách tạo file , thư mục](./Tìm hiểu Linux/docs/3.Vi_Vim_Cach_tao_file_thu_muc.md)    
 [1.5.Các gói cài đặt trong CentOS](./Tìm hiểu Linux/docs/4.Goi_cai_dat_trong_CentOS.md)    
 
-**2.DHCP :** 
+**2.DHCP :**   
   [2.1.Tìm hiểu DHCP và DHCP Server](./DHCP/docs/1.DHCP_va_DHCP_Server.md)  
 [2.2.DHCP RELAY](./DHCP/docs/2.DHCP RELAY.md)   
 
