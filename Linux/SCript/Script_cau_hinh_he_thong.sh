@@ -23,10 +23,8 @@ sysctl -p
 # Caif epel release va remi
 yum -y install epel-release
 
-
 #update
 yum update
-
 
 #reboot
 init 6
