@@ -9,13 +9,16 @@
 Tùy vào thuật toán tìm kiếm hoặc lịch sử của browser , nó sẽ gợi ý  web mình cần hoặc các web với tên tương tự .  
 
 - Sau khi nhấn enter , browser sẽ chạy dns lookup :
-  - Tại trường hợp này ta truy cập vào website wordpress chạy trên virtual host của server , nên ta cần cấu hình dns tại file hosts của client :    
+  - Tại trường hợp này ta truy cập vào website wordpress chạy trên virtual host của server , nên ta cần cấu hình dns tại file hosts của client :  
+      
 <img src="https://i.imgur.com/gOUDkvP.png">  
-  - Tại máy sẽ kiểm tra các file cấu hình dns đầu tiên , tại đây là file hosts .(Do đã cấu hình tại máy client rồi nên sẽ thiết lập kết nối tới server luôn)
+
+  - Tại máy sẽ kiểm tra các file cấu hình dns đầu tiên , tại đây là file hosts .(Do đã cấu hình tại máy client rồi nên sẽ thiết lập kết nối tới server luôn)  
+
   - Nếu không có sẽ tìm tiếp tại cache (cache của firefox , chrome ....)   
   - Nếu các bước trên không thành công , máy client sẽ gửi bản tin đến dns server(Ví dụ : 8.8.8.8) để tìm địa chỉ website cần truy cập.   
-      - Nếu đã kết nối đến dns server từ trước , client sẽ gửi thẳng bản tin đến dns server để tìm địa chỉ và dns server sẽ trả về kết quả . Còn nếu chưa kết nối với dns server sẽ đi qua quá trình sau :  
-      - Máy client gửi bản tin broadcast ARP để tìm địa chỉ dns server , khi bản tin đến hub , switch , router ... sẽ được đẩy ra tại các cổng của thiết bị để tìm địa chỉ dns server . Dns server sau khi nhận được bản tin arp sẽ gửi lại thông tin cho client về địa chỉ của mình . Sau đó client gửi bản tin dns để hỏi về địa chỉ của website  
+      - Nếu đã kết nối đến dns server từ trước , client sẽ gửi thẳng bản tin đến dns server để tìm địa chỉ và dns server sẽ trả về kết quả . Còn nếu chưa kết nối với dns server sẽ đi qua quá trình sau :    
+      - Máy client gửi bản tin broadcast ARP để tìm địa chỉ dns server , khi bản tin đến hub , switch , router ... sẽ được đẩy ra tại các cổng của thiết bị để tìm địa chỉ dns server . Dns server sau khi nhận được bản tin arp sẽ gửi lại thông tin cho client về địa chỉ của mình . Sau đó client gửi bản tin dns để hỏi về địa chỉ của website    
     
 <img src="https://i.imgur.com/EnyeBZY.png">   
 
