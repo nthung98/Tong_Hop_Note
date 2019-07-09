@@ -53,30 +53,36 @@ Nhiều Physical Volume trên những ổ đĩa khác nhau được kết hợp 
        Tạo các partition cho các ổ mới , bắt đầu từ sdb với lệnh `fdisk /dev/sdb`  
        <img src="https://i.imgur.com/0xqcyzz.png">  
        - Trong đó :  
-         - Command n để bắt đầu tạo partition.  
-         - Chọn p để tạo partition primary  
-         - Chọn 1 để đặt partition number  
-         - First sector để mặc định  
-         - Last sector để +1G (có các tùy chọn KB, MB ,GB)  
-         - Sau khi hoàn thành các bước trên nhấn t để đổi định dạng partition  
-         - Chọn 8e để thay đổi định dạng partition - Sau khi hoàn thành ấn w để lưu và thoát 
+
+   - Command n để bắt đầu tạo partition.    
+   - Chọn p để tạo partition primary    
+ - Chọn 1 để đặt partition number    
+- First sector để mặc định    
+- Last sector để +1G (có các tùy chọn KB, MB ,GB)    
+ - Sau khi hoàn thành các bước trên nhấn t để đổi định dạng partition    
+ - Chọn 8e để thay đổi định dạng partition   
+ - Sau khi hoàn thành ấn w để lưu và thoát  
+   
    Tương tự tạo thêm các partition primary từ sdb ,sdc,sdd.  
    <img src="https://i.imgur.com/KSYarlT.png">  
-   - Tạo Physical Volume  
+   - Tạo Physical Volum  e  
    Từ các partition /dev/sdb1 /dev/sdc1 /dev/sdd1  ta tạo các Physical Volume bằng lệnh sau :  
+
    ```
-   pvcreate /dev/sdb1  
-   pvcreate /dev/sdc1  
-   pvcreate /dev/sdd1  
+   pvcreate /dev/sdb1    
+   pvcreate /dev/sdc1    
+   pvcreate /dev/sdd1    
    ```   
 
    Kiểm tra bằng lệnh `pvs` hoặc `pvdisplay` xem các physical volume đã được tạo chưa  
 <img src="https://i.imgur.com/N8pTU2z.png">
    - Tạo Volume group:  
- Sau khi tạo các Physical Volume ta gộp các PV đó thành 1 Volume Group bằng lệnh sau  
+ Sau khi tạo các Physical Volume ta gộp các PV đó thành 1 Volume Group bằng lệnh sau   
+
  ```
  vgcreate vg-demo1 /dev/sdb1 /dev/sdc1 /dev/sdd1
- ```  
+ ```    
+
  Dùng các lệnh `vgs` hoặc `vgdisplay` để kiểm tra  
  <img src="https://i.imgur.com/PEzTfTq.png">  
  - Tạo Logical Volume  
@@ -128,9 +134,32 @@ Chúng ta có thể xóa 1 Physical Volume ra khỏi Volume Group như sau:
 ```
  vgreduce /dev/vg-demo1 /dev/sdb2 
 ```  
-<img src="https://i.imgur.com/lL1ci6X.png">  
+<img src="https://i.imgur.com/lL1ci6X.png"> 
 
-## 5. LVM migrate
+## 5. Thay đổi dung lượng Logical Volume :  
+Thay đổi dung lượng logical volume ta cần kiểm tra volume group có còn thừa dung lượng không :
+<img src="https://i.imgur.com/9yOwFtL.png">  
+bằng lệnh `vgdisplay` ta có thể thấy volume group còn trống và có thể resizable được
+.VỚi mỗi PE size là 4MB ta thấy còn thừa 385*4=1540MB  
+Tăng kích thước logical volume bằng lệnh sau với -L là lựa chọn dung lượng:  
+```
+lvextend -L +50M /dev/vg1/lv1
+```   
+
+<img src="https://i.imgur.com/E9zLUPR.png">  
+Ta có thể kiểm tra lại bằng lệnh `lvs` và thấy logical volume đã tăng thêm 50MB:  
+<img src="https://i.imgur.com/pzUYZGT.png">  
+
+Sau khi tăng kích thước cho Logical Volume thì Logical Volume đã được tăng nhưng file system trên volume này vẫn chưa thay đổi, bạn phải sử dụng lệnh sau để thay đổi:
+```
+ resize2fs /dev/vg1/lv1 
+```  
+Sau đó tiến hành format lại Logical Volume
+```
+ mkfs.ext4 /dev/vg-demo1/lv-demo1
+```
+Format xong mount lại và dùng như bình thường.
+## 6. LVM migrate
 Ta có thể tạo ra một bản sao dữ liệu từ một Logical Volume này đến một ổ đĩa mới mà không làm mất dữ liệu cũng như xảy ra tình trạng downtime.
 
 Mục đích của tính năng này đó là di chuyển dữ liệu của chúng ta từ một đĩa cứng cũ đến một đĩa cứng mới. Điều này được thực hiện khi mà trên đĩa hiện đang lưu dữ liệu phát sinh ra một số lỗi.  
