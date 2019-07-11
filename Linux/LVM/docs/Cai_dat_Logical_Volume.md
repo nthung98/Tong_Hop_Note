@@ -1,9 +1,22 @@
 # LOGICAL VOLUME  
 
-## 1. Cài đặt Linear :  
-  
+## 1. Cài đặt Linear :
+Từ 1 ổ cứng 1Gb , ta tạo partition 100Mb và cài đặt logicla volume ( /dev/sde1)
+  <img src="">  
   - Tạo các physical volume :  
-  
+  ```
+  pvcreate /dev/sde1
+  ```  
+  - Tạo volume group :  
+  ```
+  vgcreate vglinear /dev/sde1
+  ```
+- Tạo logical volume :  
+```
+lvcreate -L 110M -n lvlinear vglinear
+
+```  
+
 
 ## 2. Cài đặt Striped:  
 Từ Volume group được tạo trước , ta dùng lệnh sau :  
