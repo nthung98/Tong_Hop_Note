@@ -55,7 +55,7 @@ Từ 1 ổ 1Gb ta chia thành 2 physical volume , mỗi physical volume 100MB
 
 Cách ghi ổ striped : 
 
-![](../img/Striped_write.gif)   
+![](../img/striped_write.gif)   
 
 - Tạo physical volume :  
 
