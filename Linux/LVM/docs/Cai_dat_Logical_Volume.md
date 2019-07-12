@@ -116,8 +116,9 @@ Ta thấy logical volume đã tăng thêm dung lượng , từ 60MB lên 100MB
 
 ## 3. Cài đặt Mirror: 
 Từ ổ cứng 2Gb ta tạo ra 2 physical volume 100MB  
+![](../img/LV_13.png)  
 
- ![](../img/LV_13.png)  
+ 
   
  ```
 
