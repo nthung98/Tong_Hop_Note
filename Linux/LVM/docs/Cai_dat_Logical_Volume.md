@@ -1,33 +1,83 @@
 # LOGICAL VOLUME  
 
 ## 1. Cài đặt Linear :
-Từ 1 ổ cứng 1Gb , ta tạo partition 100Mb và cài đặt logicla volume ( /dev/sde1)
-  <img src="">  
+Từ 1 ổ cứng 1Gb , ta tạo partition 100Mb và cài đặt logical volume ( /dev/sde1)
+![](../img/LV_2.png)  
+
+Cách ghi của ổ Linear:  
+
+![](../img/Linear_write.gif)
   - Tạo các physical volume :  
   ```
   pvcreate /dev/sde1
   ```  
   - Tạo volume group :  
   ```
-  vgcreate vglinear /dev/sde1
+  vgcreate vg_linear /dev/sde1
   ```
 - Tạo logical volume :  
 ```
-lvcreate -L 110M -n lvlinear vglinear
+lvcreate -L 25M -n lv_linear vg_linear
 
 ```  
+  sau khi tạo logical volume ta mount lại để sử dụng :  
+  ```
+  mount /dev/vg_linear/lv_linear /home/user/Ten_directory  
+  ```  
+Ta kiểm tra lại thấy logical volume đã được mount , với dung lượng 25MB.
+![](../img/LV_1.png)  
+
+- Giả sử nếu logical volume đã đầy , ta có thể thêm dung lượng vào như sau :  
+Trước tiên ta phải kiểm tra volume group xem có còn dung lượng free không bằng lệnh : 
+```
+vgs
+```  
+![](../img/LV_4.png)   
+Ta thấy sau khi sử dung 25MB cho logical tại volume group còn free 84MB  
+Để tăng kích thước Logical Volume ta sử dụng câu lệnh sau:
+
+```
+lvextend -L +20M /dev/vg_linear/lv_linear  
+```
+Trong đó -L là dung lượng muốn thêm vào  
+
+![](../img/LV_5.png)   
+
+Ta thấy logical volume cũ đã tăng thêm 20MB. 
+
+![](../img/LV_6.png)   
+
 
 
 ## 2. Cài đặt Striped:  
-Từ Volume group được tạo trước , ta dùng lệnh sau :  
+Từ 1 ổ 1Gb ta chia thành 2 physical volume , mỗi physical volume 100MB  
+ ![](../img/LV_10.png)   
+
+Cách ghi ổ striped : 
+
+![](../img/Striped_write.gif)   
+
+- Tạo physical volume :  
+
 ```
-lvcreate -L 500M -i2 -n lv-strip vg1
+ pvcreate /dev/sdb1 /dev/sdb2
 ```  
+
+- Tạo volume group:  
+```
+vgcreate vg_striped /dev/sdb1 /dev/sdb2
+
+```  
+- Tạo logical volume:
+```
+lvcreate -L 60M -n lv_striped -i2 vg_strip
+```
+
 Chú ý:  
- -L dung lượng tạo logical volume , ở đây là 500MB  
+ -L dung lượng tạo logical volume , ở đây là 60MB  
  -i2 số physical volume ta ghi vào khi sử dụng striped,  ở đây khi dữ liệu được ghi vào sẽ chia vào 2 physical volume  
 
-<img src="https://i.imgur.com/2azZccY.png">
+
 Ta có thể kiểm tra bằng các lệnh :  
 
 ```
@@ -36,31 +86,41 @@ pvdisplay -m
 lvs --segments
 
 ```
-<img src="https://i.imgur.com/TQNWvWK.png">   
-Logical volume có type là striped .  
+  ![](../img/LV_7.png)   
 
+![](../img/LV_9.png)  
+Logical volume có type là striped .  
+ 
 
 **Lưu ý:  
-Khi chạy striped volume , các Physical volume tạo nên volume group mà logical volume sử dụng sẽ chia đôi dung lượng logical volume đã tạo ra và chia đều cho các PV .**  
+Khi tạo logical volume striped , dung lượng của Logical volume được tạo ra sẽ được các physical volume chia đều để lưu trữ .Ví dụ nếu có 2 physical volume tạo nên một volume group , ta tạo logical volume với 100MB thì mỗi physical volume sẽ chứa 50MB.**   
 
+![](../img/LV_8.png)  
 
-<img src="https://i.imgur.com/RaI3ez0.png"> 
+Ta thấy hai physical volume /dev/sdb1 và dev/sdb2 đã dành ra một khoảng là 30 MB để lưu trữ cho logical volume với dung lượng là 60MB.    
 
-Ta thấy với 2 Physical Volume 1GB sdb2 và sdc2 , mỗi PV nhận khoảng 250MB (63PE ) để lưu trữ dữ liệu của logical volume 500MB.
+- Giả sử ta đã sử dụng hết dung lượng của logical volume và extend hết từ volume group.Nếu muốn thêm dung lượng volume group ta sẽ add thêm 2 physical volume vào volume group này .  
+```
+vgextend vg_striped /dev/sdb3 /dev/sdb4
+```  
+Với sdb3 và sdb4 là hai physical volume , mỗi physical volume có dung lượng 100MB.Sau đó ta extend logical volume   
 
- Có thể kiểm tra bằng lệnh 
- ```
- lvdisplay vg2/lv-strip -m
- ```  
- <img src="https://i.imgur.com/SNF0GOx.png">
+```
+lvextend /dev/vg_striped/lv_striped -L 100M
+```
+![](../img/LV_11.png)  
+
+Ta thấy logical volume đã tăng thêm dung lượng , từ 60MB lên 100MB
+
+![](../img/LV_12.png)  
 
 ## 3. Cài đặt Mirror:  
  Tương tự như striped , ta tạo logical volume từ volume group đã được tạo trước bằng lệnh :  
  ```
- lvcreate -L 500M -m1 -n mirrorlv vg1
+
  ```  
  Trong đó :  
- -L dung lượng Logical volume
+ -L dung lượng Logical volume  
  -m1 số mirror lưu ,ở đây ta tạo 2 mirror lưu vào 2 ổ 
  <img src="https://i.imgur.com/pibr7WC.png">  
 
