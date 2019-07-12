@@ -51,7 +51,7 @@ Ta thấy logical volume cũ đã tăng thêm 20MB.
 
 ## 2. Cài đặt Striped:  
 Từ 1 ổ 1Gb ta chia thành 2 physical volume , mỗi physical volume 100MB  
- ![](../img/LV_10.png)   
+ ![](../img/LV_10.png)  
 
 Cách ghi ổ striped : 
 
@@ -114,8 +114,11 @@ Ta thấy logical volume đã tăng thêm dung lượng , từ 60MB lên 100MB
 
 ![](../img/LV_12.png)  
 
-## 3. Cài đặt Mirror:  
- Tương tự như striped , ta tạo logical volume từ volume group đã được tạo trước bằng lệnh :  
+## 3. Cài đặt Mirror: 
+Từ ổ cứng 2Gb ta tạo ra 2 physical volume 100MB  
+
+ ![](../img/LV_13.png)  
+  
  ```
 
  ```  
