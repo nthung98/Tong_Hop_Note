@@ -118,11 +118,11 @@ Ta thấy logical volume đã tăng thêm dung lượng , từ 60MB lên 100MB
 Từ ổ cứng 2Gb ta tạo ra 2 physical volume 100MB  
 ![](../img/LV_13.png)  
 
- 
-  
- ```
+ Cách ghi ổ mirror:  
+![](../img/LV_14.png)  
 
- ```  
+  
+ 
  Trong đó :  
  -L dung lượng Logical volume  
  -m1 số mirror lưu ,ở đây ta tạo 2 mirror lưu vào 2 ổ 
