@@ -1,3 +1,3 @@
 ## Tìm hiểu về script  
 
-![1.Tìm hiểu về script](../Script/)
+![1.Tìm hiểu về script]
