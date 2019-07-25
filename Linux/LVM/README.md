@@ -9,7 +9,7 @@
 
 ![4.Cài đặt ubuntu server với manual LVM](./docs/4.Cai_dat_Ubuntu_Server_LVM.md)
 
-![5.Tìm hiểu và cài đặt LVM Backup , LVM Snapshot](./docs/6.Tim_hieu_cai_dat_LVM_Snapshot_backup.md)
+![5.Tìm hiểu và cài đặt LVM Backup , LVM Snapshot](./docs/6.Tim_hieu_cai_dat_LVM_Snapshot_backup.md)  
 
 ![6.Tìm hiều và cài đặt Thinly-Provisioned Logical Volumes , Clustered Logical Volume](./docs/7.Thin_Provisioning .md)
 
