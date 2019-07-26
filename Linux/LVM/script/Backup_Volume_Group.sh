@@ -1,6 +1,5 @@
 #!/bin/bash
-echo -n "Nhap mat khau may backup "
-read rootpass
+rootpass=hung123456
 
 NOW=`date '+%F_%H:%M:%S'`;  
 yum --enablerepo=epel -y install sshpass
