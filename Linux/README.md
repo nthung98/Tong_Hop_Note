@@ -1,7 +1,7 @@
 # **Tìm hiểu về Linux**
 **1.Tìm hiểu về Linux :**  
 
-[1.1..Tìm hiểu về lịch sử LInux](./Tim_hieu_chung/docs/1.1.Lich_su_Linux.md)  
+[1.1..Tìm hiểu về lịch sử Linux](./Tim_hieu_chung/docs/1.1.Lich_su_Linux.md)  
 [1.2.Tìm hiểu về Linux](./Tim_hieu_chung/docs/1.2.Tim_hieu_ve_Linux.md)          
 [1.3.Các lệnh cơ bản ](./Tim_hieu_chung/docs/2.Cac_lenh_co_ban.md)     
 [1.4.Tìm hiểu về vi , vim và cách tạo file , thư mục](./Tim_hieu_chung/docs/3.Vi_Vim_Cach_tao_file_thu_muc.md)      
