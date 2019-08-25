@@ -55,6 +55,7 @@ Nhiều Physical Volume trên những ổ đĩa khác nhau được kết hợp 
       - Add thêm 3 ổ cứng ảo vào .  
 
 <img src="./img/LVM_1.1.png">  
+  
   - Sau khi add xong khởi động lại máy ảo , kiểm tra xem máy đã nhận 3 ổ ảo chưa bằng lệnh  
 
   ```
@@ -73,18 +74,21 @@ fdisk /dev/sdb
 
    - Trong đó :  
 
-   - Command n để bắt đầu tạo partition.    
-   - Chọn p để tạo partition primary    
- - Chọn 1 để đặt partition number    
-- First sector để mặc định    
-- Last sector để +1G (có các tùy chọn KB, MB ,GB)    
- - Sau khi hoàn thành các bước trên nhấn t để đổi định dạng partition    
- - Chọn 8e để thay đổi định dạng partition   
- - Sau khi hoàn thành ấn w để lưu và thoát  
+      > - Command n để bắt đầu tạo partition.    
+      > - Chọn p để tạo partition primary    
+      > - Chọn 1 để đặt partition number    
+      > - First sector để mặc định    
+      > - Last sector để +1G (có các tùy chọn KB, MB ,GB)    
+      > - Sau khi hoàn thành các bước trên nhấn t để đổi định dạng partition    
+      > - Chọn 8e để thay đổi định dạng partition   
+   
+   - Sau khi hoàn thành ấn w để lưu và thoát  
    
    Tương tự tạo thêm các partition primary từ sdb ,sdc,sdd.  
-<img src="./img/LVM_1.4.png">  
-  - Tạo Physical Volum  e  
+<img src="./img/LVM_1.4.png"> 
+
+  - Tạo Physical Volum :
+
    Từ các partition /dev/sdb1 /dev/sdc1 /dev/sdd1  ta tạo các Physical Volume bằng lệnh sau :  
 
    ```
@@ -94,8 +98,10 @@ fdisk /dev/sdb
    ```   
 
    Kiểm tra bằng lệnh `pvs` hoặc `pvdisplay` xem các physical volume đã được tạo chưa  
-<img src="./img/LVM_1.5.png">  
-   - Tạo Volume group:  
+<img src="./img/LVM_1.5.png">
+
+   - Tạo Volume group: 
+
  Sau khi tạo các Physical Volume ta gộp các PV đó thành 1 Volume Group bằng lệnh sau   
 
  ```
@@ -110,8 +116,8 @@ fdisk /dev/sdb
  lvcreate -L 1G -n lv-demo1 vg-demo1
  ```  
  Trong đó :  
-   >-L: Chỉ ra dung lượng của logical volume  
-   -n: Chỉ ra tên của logical volume 
+   >-L : Chỉ ra dung lượng của logical volume  
+   -n : Chỉ ra tên của logical volume 
    
 Kiểm tra bằng lệnh `lvs` hoặc `lvdisplay`  
 <img src="./img/LVM_1.7.png">  
@@ -123,7 +129,7 @@ mkfs -t ext4 /dev/vg-demo1/lv-demo1
 ```  
 <img src="./img/LVM_1.8.png">  
 - Mount và sử dụng :  
-    
+
 Ta tạo một thư mục để mount Logical Volume :  
 ```
 mkdir demo1  
