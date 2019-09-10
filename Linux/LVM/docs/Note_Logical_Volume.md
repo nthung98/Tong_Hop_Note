@@ -5,7 +5,7 @@
 ### Lab :  
 - Ta thấy tạo 4 physical volume cho volume group striped là sdb1 , sdb2,sdc1,sdc2
 
-<img src="..\img\Note_logical_volume_1.1.png">
+<img src="../img/Note_logical_volume_1.1.png">
 
 - Tạo logical volume : 
  ```
