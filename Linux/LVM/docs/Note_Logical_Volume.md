@@ -5,14 +5,14 @@
 ### Lab :  
 - Ta thấy tạo 4 physical volume cho volume group striped là sdb1 , sdb2,sdc1,sdc2
 
-<img src="../img/Note_logical_volume_1.1.png">
+<img src="..\img\Note_logical_volume_1.1.png">
 
- - Tạo logical volume : 
+- Tạo logical volume : 
  ```
  lvcreate -L 60M -n lv_striped -i2 vg_striped
  ```  
 
- <img src="../img/Note_logical_volume_1.4.png">
+<img src="../img/Note_logical_volume_1.4.png">
 
 - Sau khi tạo logical volume  ta kiểm tra physical volume bằng lệnh :
 ```
