@@ -1,6 +1,7 @@
-sudo systemctl start ceph-osd.target
-sudo systemctl start ceph-mon.target
-sudo systemctl start ceph-mds.target
+1.OSD DOwn
+sudo systemctl restart ceph-osd.target
+sudo systemctl restart ceph-mon.target
+sudo systemctl restart ceph-mds.target
 
 > Lưu ý : Chạy lên trên ở các node .
 
@@ -12,3 +13,7 @@ sudo systemctl start ceph-osd@{id}
 sudo systemctl start ceph-mon@{hostname}
 sudo systemctl start ceph-mds@{hostname}
 
+2. Xóa image :  
+
+Phải xóa  trực tiếp pool 
+ ceph osd pool delete rbdpool rbdpool --yes-i-really-really-mean-it
