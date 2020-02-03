@@ -1,12 +1,14 @@
 # CEPH STORAGE (VER NAUTILUS)
 
 ## MỤC LỤC : 
-### 1.Kiến trúc :  
-### 2.Ưu , nhược :  
-### 3.Cấu hình lab :  
-### 4.Cài đặt và quản lý :  
+### [1. Kiến trúc](#1) :
+### [2. Ưu , nhược](#2) :  
+### [3. Cấu hình lab](#3) :  
+### [4. Cài đặt và quản lý](#4) :  
 
 ------------------------------
+ <div id='1'/>   
+
 ## 1. KIẾN TRÚC :  
 Ceph là giải pháp mã nguồn mở để xây dựng hạ tầng lưu trữ phân tán, ổn định, hiệu năng cao. Nền tảng của Ceph là Object từ đó hình thành nên các dạng block, file. Định dạng dữ liệu block, file đều đc lưu dưới dạng object trong placement group của Ceph cluster.
 
@@ -17,6 +19,8 @@ Ceph là giải pháp mã nguồn mở để xây dựng hạ tầng lưu trữ 
 1.2. Mô hình mạng :   
 
 ![](./img/1_2.png)  
+  
+ <div id='2'/>     
 
 ## 2. ƯU , NHƯỢC :  
 - Ưu :
@@ -29,12 +33,16 @@ Ceph là giải pháp mã nguồn mở để xây dựng hạ tầng lưu trữ 
 
 - Nhược :  
 
+ <div id='3'/>   
+
 ## 3. CẤU HÌNH LAB :  
 - SƠ ĐỒ :  
 <img src="./img/cephdiagram.png">
 
 - Cấu hình : 
-  - 3 máy ảo ,
+  - 3 máy ảo , mỗi máy có ít nhất 3 card mạng và disk từ 2 GB trở lên ( Không tính disk cài hệ điều hành )
+
+ <div id='4'/>   
 
 ## 4. CÀI ĐẶT VÀ QUẢN LÝ :  
 ## 4.1. CÀI ĐẶT :  
