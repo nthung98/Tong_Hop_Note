@@ -43,9 +43,9 @@ The role of the first two fields should be clear from the definitions above.
 
 The third field is the maximum size (in bytes) of an object used to back file data. The object size is a multiple of the stripe unit.
 
-A file’s data is blocked into stripe units, and consecutive stripe units are stored on objects in an object set. The number of objects in a set is the same as the stripe count. No object storing file data will exceed the file’s designated object size, so after some fixed number of complete stripes, a new object set is used to store subsequent file data.
+A file’s data is blocked into stripe units, and consecutive(liên tiếp) stripe units are stored on objects in an object set. The number of objects in a set is the same as the stripe count. No object storing file data will exceed the file’s designated object size, so after some fixed number of complete stripes, a new object set is used to store subsequent file data.
 
-Note that by default, Ceph uses a simple striping strategy in which object_size equals stripe_unit and stripe_count is 1. This simply puts one stripe_unit in each object.
+> **Note that by default, Ceph uses a simple striping strategy in which object_size equals stripe_unit and stripe_count is 1. This simply puts one stripe_unit in each object.**
 
 Here’s a more complex example:
 
@@ -137,3 +137,59 @@ t |     .   | |     .   | |     .   | |     .   | |     .   |
   |   unit  | |   unit  | |   unit  | |   unit  | |  stripe | stripe
   | 15258785| | 15258786| | 15258787| | 15258788| |  unit)  | 3051757)
   \=========/ \=========/ \=========/ \=========/ \=========
+
+
+  
+Striping
+
+RBD images are striped over many objects, which are then stored by the Ceph distributed object store (RADOS). As a result, read and write requests for the image are distributed across many nodes in the cluster, generally preventing any single node from becoming a bottleneck when individual images get large or busy.
+
+The striping is controlled by three parameters:
+
+object-size
+
+    The size of objects we stripe over is a power of two. It will be rounded up the nearest power of two. The default object size is 4 MB, smallest is 4K and maximum is 32M.
+
+stripe_unit
+
+    Each [stripe_unit] contiguous bytes are stored adjacently in the same object, before we move on to the next object.
+
+stripe_count
+
+    After we write [stripe_unit] bytes to [stripe_count] objects, we loop back to the initial object and write another stripe, until the object reaches its maximum size. At that point, we move on to the next [stripe_count] objects.
+
+By default, [stripe_unit] is the same as the object size and [stripe_count] is 1. Specifying a different [stripe_unit] and/or [stripe_count] is often referred to as using “fancy” striping and requires format 2.
+
+
+--object-size size-in-B/K/M
+
+    Specifies the object size in B/K/M. Object size will be rounded up the nearest power of two; if no suffix is given, unit B is assumed. The default object size is 4M, smallest is 4K and maximum is 32M.
+
+--stripe-unit size-in-B/K/M
+
+    Specifies the stripe unit size in B/K/M. If no suffix is given, unit B is assumed. See striping section (below) for more details.
+
+--stripe-count num¶
+
+    Specifies the number of objects to stripe over before looping back to the first object. See striping section (below) for more details.
+
+
+## NOTE : 
+I guess the rbd kernel does not support the 'fancy striping', after I read the kernel code rbd.c
+----------------------------------------------------------------------------------------------------------------------
+if (stripe_unit != obj_size) {
+rbd_warn(rbd_dev, "unsupported stripe unit "
+"(got %llu want %llu)",
+stripe_unit, obj_size);
+return -EINVAL;
+}
+stripe_count = ceph_decode_64(&p);
+if (stripe_count != 1) {
+rbd_warn(rbd_dev, "unsupported stripe count "
+"(got %llu want 1)", stripe_count);
+return -EINVAL;
+}
+
+- QeMU
+- Hiệu năng vẫn đảm bảo với default 
+
