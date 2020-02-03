@@ -10,7 +10,7 @@
 
 ## 3. CẤU HÌNH LAB :  
 - SƠ ĐỒ :  
-<img src="../img/cephdiagram.png">
+<img src="./img/cephdiagram.png">
 
 - Cấu hình : 
   - 3 máy ảo ,
