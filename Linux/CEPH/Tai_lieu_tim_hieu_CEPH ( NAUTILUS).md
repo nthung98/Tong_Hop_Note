@@ -7,6 +7,27 @@
 ### 4.Cài đặt và quản lý :  
 
 ------------------------------
+## 1. KIẾN TRÚC :  
+Ceph là giải pháp mã nguồn mở để xây dựng hạ tầng lưu trữ phân tán, ổn định, hiệu năng cao. Nền tảng của Ceph là Object từ đó hình thành nên các dạng block, file. Định dạng dữ liệu block, file đều đc lưu dưới dạng object trong placement group của Ceph cluster.
+
+1.1. Kiến trúc :  
+
+![](./img/CEPH_1_1.png)  
+
+1.2. Mô hình mạng :   
+
+![](./img/1_2.png)  
+
+## 2. ƯU , NHƯỢC :  
+- Ưu :
+  - Thay thế lưu trữ trên ổ đĩa server thông thường
+  -  Backup, dự phòng
+  -  Triển khai các dịch vụ High Avaibility như Load Balancing for Web Server, DataBase Replication…
+  -  Giải quyết bài toán lưu trữ cho điện toán đám mây
+  -  Khả năng mở rộng, sử dụng nhiều phần cứng khác nhau
+  -  Ko tồn tại "single point of failure"   
+
+- Nhược :  
 
 ## 3. CẤU HÌNH LAB :  
 - SƠ ĐỒ :  
