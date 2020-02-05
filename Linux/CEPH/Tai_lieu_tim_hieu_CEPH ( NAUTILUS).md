@@ -26,12 +26,14 @@ Ceph là giải pháp mã nguồn mở để xây dựng hạ tầng lưu trữ 
 - Ưu :
   - Thay thế lưu trữ trên ổ đĩa server thông thường
   -  Backup, dự phòng
-  -  Triển khai các dịch vụ High Avaibility như Load Balancing for Web Server, DataBase Replication…
   -  Giải quyết bài toán lưu trữ cho điện toán đám mây
   -  Khả năng mở rộng, sử dụng nhiều phần cứng khác nhau
   -  Ko tồn tại "single point of failure"   
 
 - Nhược :  
+  - Khó sử dụng và cài đặt .
+  - Không có nhiều tài liệu để tham khảo .
+
 
  <div id='3'/>   
 
@@ -64,24 +66,61 @@ yum install wget byobu curl git byobu python-setuptools python-virtualenv -y
 ```
 hostnamectl set-hostname ceph1
 ```
-- Thiết lập IP Add, trong hướng dẫn này, VLAN 192.168.98.0/24 sẽ ra internet để tải các gói cài đặt.
+- Thiết lập IP cho các card mạng, trong hướng dẫn này, 5.5.5.0/24 sẽ ra internet để tải các gói cài đặt.
 ```
-echo "Setup IP  eth0"
-nmcli con modify eth0 ipv4.addresses 192.168.98.85/24
-nmcli con modify eth0 ipv4.gateway 192.168.98.1
-nmcli con modify eth0 ipv4.dns 8.8.8.8
-nmcli con modify eth0 ipv4.method manual
-nmcli con mod eth0 connection.autoconnect yes
+vi ifcfg-enp0s7
 
-echo "Setup IP  eth1"
-nmcli con modify eth1 ipv4.addresses 192.168.62.85/24
-nmcli con modify eth1 ipv4.method manual
-nmcli con mod eth1 connection.autoconnect yes
+```TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+IPADDR=10.0.2.7
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp0s7
+DEVICE=enp0s3
+ONBOOT=yes```
 
-echo "Setup IP  eth2"
-nmcli con modify eth2 ipv4.addresses 192.168.63.85/24
-nmcli con modify eth2 ipv4.method manual
-nmcli con mod eth2 connection.autoconnect yes
+
+vi ifcfg-enp0s8
+
+```TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+IPADDR=5.5.5.9
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp0s7
+ONBOOT=yes```  
+
+
+vi ifcfg-enp0s9
+
+  ```TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+IPADDR=6.6.6.13
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp0s9
+ONBOOT=yes```
 ```
 - Cấu hình chế độ firewall để tiện trong môi trường lab. Trong môi trường production cần bật firewall hoặc iptables hoặc có biện pháp xử lý khác tương ứng để đảm bảo các vấn đề về an toàn.
 ```
@@ -388,7 +427,7 @@ drwx------ 5 cephuser cephuser  151 Sep  6 23:14 ..
 
 - Khai báo thêm các tùy chọn cho việc triển khai, vận hành CEPH vào file ceph.conf này trước khi cài đặt các gói cần thiết cho ceph trên các node. Lưu ý các tham số về network.
 
-- Ta sẽ dụng vlan 192.168.62.0/24 cho đường truy cập của các client (Hay gọi là ceph public. Vlan 192.168.63.0/24 cho đường replicate dữ liệu, các dữ liệu sẽ được sao chép & nhân bản qua vlan này.
+- Ta sẽ dụng mạng 5.5.5.0/24 cho đường truy cập của các client (Hay gọi là ceph public. mạng 6.6.6.0/24 cho đường replicate dữ liệu, các dữ liệu sẽ được sao chép & nhân bản qua vlan này.
 ```
 echo "public network = 192.168.62.0/24" >> ceph.conf
 echo "cluster network = 192.168.63.0/24" >> ceph.conf
@@ -420,7 +459,7 @@ ceph-deploy install --release nautilus ceph1 ceph2 ceph3
 ```
 ceph-deploy mon create-initial
 ```
-- Kết quả sinh ra các file trong thư mục hiện tại
+- Kết quả sinh ra các file trong thư mục my-cluster : 
 ```
 cephuser@ceph1:~/my-cluster$ ls -alh
 total 348K
@@ -886,4 +925,79 @@ sudo mount /dev/rbd0 /mnt
 ```
 - Kiểm tra lại xem đã mount được hay chưa bằng lệnh df -hT  
 
-## 4.1.4. CÀI ĐẶT CHO CEPH OBJECT : 
+## 4.1.4. CÀI ĐẶT CHO CEPH OBJECT :  
+ Cấu hình object storage và khai báo sử dụng trên ceph-dashboard
+
+Trong hướng dẫn này sử dụng node ceph2 để cài đặt thành phần Radosgw để cung cấp object storage.
+
+Đứng trên ceph1 tiếp tục thực hiện lệnh dưới để triển khai thành phần radosgw. Lưu ý, lúc này vẫn đang dùng tài khoản cephuser và đứng ở thư mục my-cluster
+
+ceph-deploy install --rgw ceph2
+
+ceph-deploy rgw create ceph2
+
+Kết quả lệnh sẽ là:
+radosgw-admin user create --uid=admin1 --display-name=admin --system
+
+ "keys": [
+        {
+            "user": "admin1",
+            "access_key": "HSO793RPS19O41497YXX",
+            "secret_key": "AeOEGwOdBlL8DqOAvfqZueqJYyo9aFcGetACXcqN"
+        }
+ Thực hiện khai báo access_key và secret_keytích hợp với dashboard của ceph. Lưu ý phải dùng chuỗi đối với kết quả của bạn nhé.
+
+ceph dashboard set-rgw-api-access-key CQF41G7RFFSXV37NXE82
+ceph dashboard set-rgw-api-secret-key S7SC3kGkdT22Okw6cbwThYIxerPH40J3UZgLk44C
+ceph dashboard set-rgw-api-ssl-verify False
+
+Sau bước trên có thể truy cập vào dashboard để quản lý user .
+
+
+Storing/Retrieving Object Data
+
+To store object data in the Ceph Storage Cluster, a Ceph client must:
+
+    Set an object name
+
+    Specify a pool
+
+The Ceph Client retrieves the latest cluster map and the CRUSH algorithm calculates how to map the object to a placement group, and then calculates how to assign the placement group to a Ceph OSD Daemon dynamically. To find the object location, all you need is the object name and the pool name. For example:
+
+ceph osd map {poolname} {object-name}
+
+Exercise: Locate an Object
+
+As an exercise, lets create an object. Specify an object name, a path to a test file containing some object data and a pool name using the rados put command on the command line. For example:
+
+echo {Test-data} > testfile.txt
+ceph osd pool create mytest
+rados put {object-name} {file-path} --pool=mytest
+rados put test-object-1 testfile.txt --pool=mytest
+
+To verify that the Ceph Storage Cluster stored the object, execute the following:
+
+rados -p mytest ls
+
+Now, identify the object location:
+
+ceph osd map {pool-name} {object-name}
+ceph osd map mytest test-object-1
+
+Ceph should output the object’s location. For example:
+
+osdmap e537 pool 'mytest' (1) object 'test-object-1' -> pg 1.d1743484 (1.4) -> up [1,0] acting [1,0]
+
+To remove the test object, simply delete it using the rados rm command.
+
+For example:
+
+rados rm test-object-1 --pool=mytest
+
+To delete the mytest pool:
+
+ceph osd pool rm mytest
+
+(For safety reasons you will need to supply additional arguments as prompted; deleting pools destroys data.)
+
+As the cluster evolves, the object location may change dynamically. One benefit of Ceph’s dynamic rebalancing is that Ceph relieves you from having to perform data migration or balancing manually.
