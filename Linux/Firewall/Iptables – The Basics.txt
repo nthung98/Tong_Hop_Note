@@ -1,0 +1,51 @@
+Iptables – The Basics
+
+At the low level, it is the kernel itself which “decides” what to do with packets based on rules grouped in chains, or sentences. These chains define what actions should be taken when a package matches the criteria specified by them.
+
+The first action taken by iptables will consist in deciding what to do with a packet:
+
+    Accept it (let it go through into our network)?
+    Reject it (prevent it from accessing our network)?
+    Forward it (to another chain)?
+
+Just in case you were wondering why this tool is called iptables, it’s because these chains are organized in tables, with the filter table being the most well know and the one that is used to implement packet filtering with its three default chains:
+
+1. The INPUT chain handles packets coming into the network, which are destined for local programs.
+
+2. The OUTPUT chain is used to analyze packets originated in the local network, which are to be sent to the outside.
+
+3. The FORWARD chain processes the packets which should be forwarded to another destination (as in the case of a router).
+
+For each of these chains there is a default policy, which dictates what should be done by default when packets do not match any of the rules in the chain. You can view the rules created for each chain and the default policy by running the following command:
+
+# iptables -L
+
+The available policies are as follows:
+
+    ACCEPT → lets the packet through. Any packet that does not match any rules in the chain is allowed into the network.
+    DROP → drops the packet quietly. Any packet that does not match any rules in the chain is prevented from entering the network.
+    REJECT → rejects the packet and returns an informative message. This one in particular does not work as a default policy. Instead, it is meant to complement packet filtering rules.
+Adding Rules
+
+To add a rule to the firewall, invoke the iptables command as follows:
+
+# iptables -A chain_name criteria -j target
+
+where,
+
+    -A stands for Append (append the current rule to the end of the chain).
+    chain_name is either INPUT, OUTPUT, or FORWARD.
+    target is the action, or policy, to apply in this case (ACCEPT, REJECT, or DROP).
+    criteria is the set of conditions against which the packets are to be examined. It is composed of at least one (most likely more) of the following flags. Options inside brackets, separated by a vertical bar, are equivalent to each other. The rest represents optional switches:
+
+[--protocol | -p] protocol: specifies the protocol involved in a rule.
+[--source-port | -sport] port:[port]: defines the port (or range of ports) where the packet originated.
+[--destination-port | -dport] port:[port]: defines the port (or range of ports) to which the packet is destined.
+[--source | -s] address[/mask]: represents the source address or network/mask.
+[--destination | -d] address[/mask]: represents the destination address or network/mask.
+[--state] state (preceded by -m state): manage packets depending on whether they are part of a state connection, where state can be NEW, ESTABLISHED, RELATED, or INVALID.
+[--in-interface | -i] interface: specifies the input interface of the packet.
+[--out-interface | -o] interface: the output interface.
+[--jump | -j] target: what to do when the packet matches the rule.
+
+<img src='./img/1.png'>
